@@ -117,12 +117,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IDatabaseFactory.cs" />
+    <Compile Include="Contracts\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DatabaseFactory.cs" />
+    <Compile Include="Services\UserRepository.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SAMTool.DataAccessObject\SAMTool.DataAccessObject.csproj">
       <Project>{f1c0d7a8-eea5-47bc-b605-3cd81193e2ab}</Project>

@@ -118,8 +118,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IHome.cs" />
+    <Compile Include="Contracts\IUserBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Home.cs" />
+    <Compile Include="Services\UserBusiness.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
