@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace SAMTool.UI.Models
+{
+    public class UserViewModel
+    { 
+        public Guid? ID { get; set; }
+
+        [Required(ErrorMessage = "Please enter user name")]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Please enter login name")]
+        [Display(Name = "Login Name")]
+        public string LoginName { get; set; }
+
+        [Display(Name = "Active(Yes/No)")]
+        public bool Active { get; set; }
+
+        [Required(ErrorMessage = "Please enter email")]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Display(Name = "Password")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$", ErrorMessage = "should have minimum 6 Char, one alphabet,one numeric and one special character")]
+        [StringLength(250, MinimumLength = 6, ErrorMessage = "{0} should be minimum 6 Char")]
+        public string Password { get; set; }
+
+        [Display(Name = "Confirm Password")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$", ErrorMessage = "should have minimum 6 Char, one alphabet,one numeric and one special character")]
+        [Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
+        [StringLength(250, MinimumLength = 6, ErrorMessage = "{0} should be minimum 6 Char")]
+        public string ConfirmPassword { get; set; }
+
+
+        public string RoleCSV { get; set; }
+
+        [Display(Name = "Related Categories")]
+        public List<RolesViewModel> RoleList { get; set; }
+
+    }
+}

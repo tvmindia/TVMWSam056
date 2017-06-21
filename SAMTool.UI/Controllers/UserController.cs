@@ -18,7 +18,7 @@ namespace SAMTool.UI.Controllers
         }
 
         // GET: User
-        public ActionResult Index()
+        public ActionResult User()
         {
             return View();
         }
