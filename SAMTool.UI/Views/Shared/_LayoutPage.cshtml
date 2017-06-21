@@ -11,58 +11,16 @@
     @using SAMTool.UI.App_Start
     @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/css")
     @RenderSection("styles", required: false)
-    <link rel="icon" type="image/png" href="~/Content/images/SCManager.png"/>
-     <style>
-     
-     </style>
- 
-  
+    
 </head>
 <body>
-   
-        <nav class="navbar navbar-default">
-
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><img height="30" alt="SCManager" src=@Url.Content("~/Content/images/SCManager.png")></a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <br />
-
-             
-
-                <ul class="nav navbar-nav navbar-right">
-                     <li ><a href="#" class="fa fa-user" style="color: #8fdd3c;">&nbsp;@User.Identity.Name</a></li>
-                    <li class="dropdown" >
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret" style="color: #8fdd3c;"></span></a>
-                        <ul class="dropdown-menu" >
-                            <li>@Html.ActionLink("User Profile", "Index", "UserProfile", null, null)</li>
-
-                          
-                            <li><a href="/Account/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                            @*<li><a href="#" onclick="Logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>*@
-                        </ul>
-                    </li>
-
-                </ul>
-            </div>
-
-
-
-        </nav>
-
-    
     <div class="container-fluid">
         @RenderBody()
   
     </div>
 
      
-        <footer class="info small myfooter"  >
+        <footer class="info small myfooter">
             <a href="http://www.thrithvam.com" style="color: inherit;text-decoration: none;" ><p> &nbsp; &nbsp; &copy;Thrithvam Technologies @DateTime.Now.Year</p></a>
         </footer>
 

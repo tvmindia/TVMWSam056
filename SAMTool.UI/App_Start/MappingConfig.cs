@@ -1,4 +1,6 @@
 ﻿
+using SAMTool.DataAccessObject.DTO;
+using SAMTool.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +19,8 @@ namespace SAMTool.UI.App_Start
                 //viewmodel =====> domain
                 //ReverseMap() makes it possible to map both ways.
 
-               // config.CreateMap<TempVM, Temp>().ReverseMap();
-
+                // config.CreateMap<TempVM, Temp>().ReverseMap();
+                config.CreateMap<HomeViewModel, Home>().ReverseMap();
 
             });
         }

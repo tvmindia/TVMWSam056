@@ -1,8 +1,65 @@
-﻿
+﻿@using SAMTool.UI.Models;
+@model IEnumerable<HomeViewModel>
+@using SAMTool.UI.App_Start
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
+<style>
+    .container{
+    min-height:650px;
+}
 
-<h2>@ViewBag.name</h2>
+.list-group-item {
+    /*! height:auto; */
+    min-height:75px;
+}
+list-group-item.active small {
+   
+}
+
+.list-group-item-heading
+{
+    margin-top: 5px;
+}
+
+.ListDesc {
+     color:#808080;
+     padding-bottom:10px;
+     font-size:11px;
+     font-family:'Segoe UI'
+}
+
+</style>
+<div class="container">
+    <div class="row">
+        <div>
+            <h3><span class="ReportTitle"> System Access Management </span></h3>
+            <div class="list-group">
+                @{
+                    if (Model != null)
+                    {
+                        foreach (HomeViewModel svm in Model)
+                        {
+                            <div class="list-group-item">
+
+                                <div class="col-md-10">
+                                    <a href="/@svm.Controller/@svm.Action" class="btn btn-link">
+                                        <h4 class="list-group-item-heading"> @svm.LinkName </h4></a>
+                                        <p class="list-group-item-text ListDesc">
+                                            @svm.LinkDescription
+                                        </p>
+                                 </div>
+                            </div>
+                        }
+
+                    }
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
 

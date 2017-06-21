@@ -1,4 +1,7 @@
-﻿using SAMTool.BusinessServices.Contracts;
+﻿using AutoMapper;
+using SAMTool.BusinessServices.Contracts;
+using SAMTool.DataAccessObject.DTO;
+using SAMTool.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +12,16 @@ namespace SAMTool.UI.Controllers
 {
     public class HomeController : Controller
     {
-        IHome _home;
-        public HomeController(IHome home)
+        IHomeBusiness _homeBusiness;
+        public HomeController(IHomeBusiness home)
         {
-            _home = home;
+            _homeBusiness = home;
         }
         // GET: Home
         public ActionResult Index()
         {
-            @ViewBag.name=_home.show();
-            return View();
+            List<HomeViewModel> SysLinks = Mapper.Map<List<Home>, List<HomeViewModel>>(_homeBusiness.GetAllSysLinks());
+            return View(SysLinks);
         }
     }
 }
