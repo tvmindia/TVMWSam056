@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\Common.cs" />
+    <Compile Include="DTO\Home.cs" />
     <Compile Include="DTO\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
