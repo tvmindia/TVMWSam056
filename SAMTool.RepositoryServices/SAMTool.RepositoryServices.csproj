@@ -119,10 +119,12 @@
   <ItemGroup>
     <Compile Include="Contracts\IDatabaseFactory.cs" />
     <Compile Include="Contracts\IHomeRepository.cs" />
+    <Compile Include="Contracts\IRolesRepository.cs" />
     <Compile Include="Contracts\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DatabaseFactory.cs" />
     <Compile Include="Services\HomeRepository.cs" />
+    <Compile Include="Services\RolesRepository.cs" />
     <Compile Include="Services\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup />
