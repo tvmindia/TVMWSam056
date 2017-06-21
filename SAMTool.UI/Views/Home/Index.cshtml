@@ -9,11 +9,6 @@
     .container{
     min-height:650px;
 }
-
-.list-group-item {
-    /*! height:auto; */
-    min-height:75px;
-}
 list-group-item.active small {
    
 }
@@ -31,36 +26,78 @@ list-group-item.active small {
 }
 .list-group-item{
     border:none;
+    height: 110px;
 }
 </style>
 <div class="container">
     <div class="row">
         <div>
             <h3><span class="ReportTitle"> System Access Management </span></h3>
-            <div class="list-group">
-                @{
-                    if (Model != null)
-                    {
-                        foreach (HomeViewModel svm in Model)
-                        {
-                            <div class="list-group-item">
+            <div class="col-lg-12">
+                <div class="col-lg-6">
+                    <div class="list-group">
+                        @{
+                            if (Model != null)
+                            {
+                                foreach (HomeViewModel svm in Model)
+                                {
+                                    if (svm.Type == "LHS")
+                                    {
+                                        <div class="list-group-item">
 
-                                <div class="col-md-10">
-                                    <a href="/@svm.Controller/@svm.Action" class="btn btn-link">
-                                        <h4 class="list-group-item-heading"> @svm.LinkName </h4></a>
-                                        <p class="list-group-item-text ListDesc">
-                                            @svm.LinkDescription
-                                        </p>
-                                 </div>
-                            </div>
+                                            <div class="col-md-10">
+                                                <a href="/@svm.Controller/@svm.Action" class="btn btn-link">
+                                                    <h4 class="list-group-item-heading"> @svm.LinkName </h4>
+                                                </a>
+                                                <p class="list-group-item-text ListDesc">
+                                                    @svm.LinkDescription
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+
+                            }
+
                         }
 
-                    }
 
-                }
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="list-group">
+                        @{
+                            if (Model != null)
+                            {
+                                foreach (HomeViewModel svm in Model)
+                                {
+                                    if (svm.Type == "RHS")
+                                    {
+                                        <div class="list-group-item">
+
+                                            <div class="col-md-10">
+                                                <a href="/@svm.Controller/@svm.Action" class="btn btn-link">
+                                                    <h4 class="list-group-item-heading"> @svm.LinkName </h4>
+                                                </a>
+                                                <p class="list-group-item-text ListDesc">
+                                                    @svm.LinkDescription
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+
+                            }
+
+                        }
 
 
+                    </div>
+                </div>
             </div>
+           
         </div>
     </div>
 </div>
