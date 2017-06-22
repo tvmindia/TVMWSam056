@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Newtonsoft.Json;
 using SAMTool.BusinessServices.Contracts;
 using SAMTool.DataAccessObject.DTO;
 using SAMTool.UI.Models;
@@ -31,5 +32,23 @@ namespace SAMTool.UI.Controllers
             userobj.RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllRoles());
             return View(userobj); 
         }
+
+
+        #region GetAllUsers
+        [HttpGet]
+        public string GetAllUsers()
+        {
+            try
+            {
+
+                List<UserViewModel> userList = Mapper.Map<List<User>, List<UserViewModel>>(_userBusiness.GetAllUsers());
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = userList });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        #endregion GetAllUsers
     }
 }

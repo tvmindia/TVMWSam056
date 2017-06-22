@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAMTool.DataAccessObject.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace SAMTool.BusinessServices.Contracts
 {
      public interface IUserBusiness
     {
+        List<User> GetAllUsers();
     }
 }

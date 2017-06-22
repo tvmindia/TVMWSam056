@@ -12,7 +12,7 @@ namespace SAMTool.DataAccessObject.DTO
         public string LoginName { get; set; }
         public string Password { get; set; }
         public string RoleList { get; set; }
-        public string[] Roles { get; set; }
+        public string RoleCSV { get; set; }
         public bool Active { get; set; }
         public string Email { get; set; }
 

@@ -18,7 +18,7 @@ namespace SAMTool.RepositoryServices.Services
         }
 
         public List<Roles> GetAllRoles()
-        {//GetRoles
+        { 
             List<Roles> rolesList = null;
             try
             {
