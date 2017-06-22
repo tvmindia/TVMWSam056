@@ -9,7 +9,7 @@ namespace SAMTool.UI.Controllers
     public class ApplicationController : Controller
     {
         // GET: Application
-        public ActionResult Application()
+        public ActionResult Index()
         {
             return View();
         }

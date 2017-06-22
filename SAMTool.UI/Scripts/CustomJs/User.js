@@ -33,8 +33,9 @@ function GetAllUsers() {
 
     try {
         debugger;
+        var data = {};
         var ds = {};
-        ds = GetDataFromServer("User/GetAllUser/");
+        ds = GetDataFromServer("User/GetAllUsers/", data);
         if (ds != '') {
             ds = JSON.parse(ds);
         }

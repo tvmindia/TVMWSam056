@@ -23,7 +23,7 @@ namespace SAMTool.UI.Controllers
 
 
         // GET: Roles
-        public ActionResult Roles()
+        public ActionResult Index()
         {
             return View();
         }

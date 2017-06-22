@@ -25,7 +25,7 @@ namespace SAMTool.UI.Controllers
         }
 
         // GET: User
-        public ActionResult User()
+        public  ActionResult Index()
         {
 
             UserViewModel userobj = new UserViewModel();
