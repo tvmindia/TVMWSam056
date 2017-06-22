@@ -20,5 +20,16 @@ namespace SAMTool.BusinessServices.Services
         {
             return _appObjectRepository.GetAllAppObjects(id);
         }
+        public AppObject InsertUpdate(AppObject AppObjectObj)
+        {
+            if(AppObjectObj.ID!=Guid.Empty)
+            {
+                return _appObjectRepository.UpdateObject(AppObjectObj);
+            }
+            else
+            {
+                return _appObjectRepository.InsertObject(AppObjectObj);
+            }
+        }
     }
 }
