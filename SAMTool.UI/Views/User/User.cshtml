@@ -7,46 +7,30 @@
 } 
 
 <h2>User</h2>
-<div id="Tab" class="container SCtabContainer">
-    <ul class="nav nav-pills">
-        <li class="active">
-            <a id="TabList" onclick="List()" href="#UsersList" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Users List</a>
-        </li>
-        <li>
-            <a id="TabAdd" onclick="Add()" href="#UserEntry" data-toggle="tab" style="width:170px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Users Entry</a>
-        </li>
-
-    </ul>
-    <div class="tab-content clearfix">
-        <div class="tab-pane fade in active" id="UsersList">
-            <div class="col-md-12">&nbsp;</div>
-            <div class="col-md-12">
-                <table id="tblUsersList" class="table table-striped table-bordered table-hover" cellspacing="0">
-                    <thead>
-                        <tr class="text-center">
-                            <th>ID</th>  
-                            <th>User Name</th> 
-                            <th>Login Name</th>
-                            <th>Email</th>
-                            <th>Roles</th>
-                            <th>Active</th>
-                            <th>Created Date</th>
-                            <th>...</th> 
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="UserEntry">
-            <div class="col-md-12">&nbsp;</div>
-            <div class="col-md-12">
+<div id="MainDiv" class="container SCtabContainer">  
+        <div id="ButtonPatchDiv" class="col-md-12">Button Patch &nbsp;</div>
+        <div id="ManageUserTableDiv" class="col-md-12">
+            <table id="tblUsersList" class="table table-striped table-bordered table-hover" cellspacing="0">
+                <thead>
+                    <tr class="text-center">
+                        <th>ID</th>  
+                        <th>User Name</th> 
+                        <th>Login Name</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Active</th>
+                        <th>Created Date</th>
+                        <th>...</th> 
+                    </tr>
+                </thead>
+            </table>
+        </div> 
+        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-12">
                 @using (Ajax.BeginForm("InsertUpdateUser", "UserProfile", new AjaxOptions { HttpMethod = "POST", Confirm = "", OnSuccess = "UserSaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "BeforePost", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "userform" }))
                 {
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-horizontal">
-
-
+                    @Html.AntiForgeryToken() 
+                    <div class="form-horizontal"> 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="inputForm col-md-12">
                             &nbsp;
@@ -141,12 +125,11 @@
 
                         </div>
                     </div>
-                }
-
+                } 
                 <div>
                 </div>
             </div>
-        </div>
+     
         <div id="UserDelete" hidden="hidden">
             @using (Ajax.BeginForm("DeleteUser", "UserProfile", new AjaxOptions { HttpMethod = "POST", OnSuccess = "DeleteSuccess", Confirm = "Are you sure?", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form" }))
             {
@@ -157,7 +140,7 @@
                 </div>
             }
         </div>
-    </div>
+    
 </div>
 
 

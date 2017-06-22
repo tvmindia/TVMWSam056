@@ -1,4 +1,8 @@
-﻿using SAMTool.BusinessServices.Contracts;
+﻿using AutoMapper;
+using Newtonsoft.Json;
+using SAMTool.BusinessServices.Contracts;
+using SAMTool.DataAccessObject.DTO;
+using SAMTool.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +27,22 @@ namespace SAMTool.UI.Controllers
         {
             return View();
         }
+
+        #region GetAllRolesBySC
+        [HttpGet] 
+        public string GetAllRolesBySC(string SCCode)
+        {
+            try
+            {
+
+                List<RolesViewModel> rolesVMLisit = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllRoles());
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = rolesVMLisit });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        #endregion GetAllRolesBySC
     }
 }

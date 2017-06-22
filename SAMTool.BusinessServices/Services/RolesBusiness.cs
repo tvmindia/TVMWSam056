@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SAMTool.DataAccessObject.DTO;
 
 namespace SAMTool.BusinessServices.Services
 {
@@ -16,5 +17,19 @@ namespace SAMTool.BusinessServices.Services
             _rolesRepository = rolesRepository;
         }
 
+        public List<Roles> GetAllRoles()
+        {
+            List<Roles> RoleList = null;
+            try
+            {
+                RoleList = _rolesRepository.GetAllRoles();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return RoleList;
+          
+        }
     }
 }
