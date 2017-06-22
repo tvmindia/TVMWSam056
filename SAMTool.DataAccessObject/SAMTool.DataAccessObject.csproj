@@ -117,6 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\Application.cs" />
     <Compile Include="DTO\AppObject.cs" />
     <Compile Include="DTO\Common.cs" />
     <Compile Include="DTO\Roles.cs" />
