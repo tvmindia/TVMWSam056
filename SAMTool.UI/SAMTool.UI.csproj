@@ -328,6 +328,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\add.png" />
     <Content Include="Content\images\back.png" />
+    <Content Include="Content\images\background.jpg" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\printer.png" />
     <Content Include="Content\images\reset.png" />
@@ -399,6 +400,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\CustomJs\Application.js" />
+    <Content Include="Scripts\CustomJs\AppObject.js" />
     <Content Include="Scripts\CustomJs\Roles.js" />
     <Content Include="Scripts\CustomJs\User.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

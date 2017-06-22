@@ -81,11 +81,11 @@
 
  .myfooter {
 
-      background-image: url('images/73a6f1c8.png');
+    background-image: url('images/73a6f1c8.png');
     background-repeat: repeat;
     width:100%;
     bottom:0px;
-    position:relative;
+    position:absolute;
 }
 
 .graphledger {
@@ -235,7 +235,7 @@
 
 
 .buttonpatch a[title]:hover:after{
-/*content: attr(title);
+content: attr(title);
 padding: 4px 6px;
 color: #85003a;
 position: absolute;
@@ -254,14 +254,14 @@ background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ff
 background-image: -webkit-linear-gradient(top, #ffffff, #eeeeee);
 background-image: -moz-linear-gradient(top, #ffffff, #eeeeee);
 background-image: -ms-linear-gradient(top, #ffffff, #eeeeee);
-background-image: -o-linear-gradient(top, #ffffff, #eeeeee);*/
+background-image: -o-linear-gradient(top, #ffffff, #eeeeee);
 }
-/*-------------------------------------------------------------------------------------------------------------------*/
+-------------------------------------------------------------------------------------------------------------------
 
 
 
 
-/*.nav-pills > li > a {
+.nav-pills > li > a {
   border-radius: 4px 4px 0 0 ;
       font-size: medium!important;
        color : #313131!important;
@@ -285,7 +285,11 @@ background-image: -o-linear-gradient(top, #ffffff, #eeeeee);*/
     
 }
 
- 
+ body {
+    margin: 0;
+    background-image: url(images/background.jpg);
+    background-repeat: repeat;
+}
 
 .tab-content {
   color : black;
@@ -409,9 +413,9 @@ color: #e32;
     left: 50%;
     width:30em;
     height:18em;
-    margin-top: -9em; /*set to a negative number 1/2 of your height*/
-    /*margin-left: -15em; /*set to a negative number 1/2 of your width*/
-    /*border: 1px solid #ccc;
+    margin-top: -9em; set to a negative number 1/2 of your height
+    margin-left: -15em; set to a negative number 1/2 of your width
+    border: 1px solid #ccc;
      
      background:rgba(243, 243, 243,0.9);  
      border-radius:10px;
@@ -481,10 +485,10 @@ color: #e32;
     border-bottom:solid;
     border-width:thin;
     border-color:lightgray;
-}*/
+}
 
 
-/*.DTFC_LeftBodyLiner {
+.DTFC_LeftBodyLiner {
      
  background-color:rgb(245, 245, 245);
 }
@@ -508,5 +512,5 @@ color: #e32;
         background-image: url('../Content/images/calendar.png');
         background-Position: 97% center;
         background-Repeat: no-repeat;
-        cursor: pointer;
-    }**//*/
+        cursor: pointe
+    

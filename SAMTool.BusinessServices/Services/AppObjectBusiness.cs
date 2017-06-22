@@ -1,4 +1,5 @@
 ﻿using SAMTool.BusinessServices.Contracts;
+using SAMTool.DataAccessObject.DTO;
 using SAMTool.RepositoryServices.Contracts;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace SAMTool.BusinessServices.Services
         public AppObjectBusiness(IAppObjectRepository appObjectRepository)
         {
             _appObjectRepository = appObjectRepository;
+        }
+        public List<AppObject> GetAllAppObjects(Guid id)
+        {
+            return _appObjectRepository.GetAllAppObjects(id);
         }
     }
 }

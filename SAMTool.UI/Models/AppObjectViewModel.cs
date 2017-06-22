@@ -10,8 +10,9 @@ namespace SAMTool.UI.Models
     {
         public Guid ID { get; set; }
         public Guid AppID { get; set; }
+        public string AppName { get; set; }
         public string ObjectName { get; set; }
-        public CommonViewModel commonViewDetails { get; set; }
+        public CommonViewModel commonDetails { get; set; }
         public List<SelectListItem> ApplicationList { get; set; }
     }
 }

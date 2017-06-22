@@ -19,6 +19,7 @@ namespace SAMTool.UI.App_Start
             bundles.Add(new ScriptBundle("~/bundles/datatable").Include("~/Scripts/DataTables/jquery.dataTables.min.js", "~/Scripts/DataTables/dataTables.bootstrap.min.js", "~/Scripts/DataTables/dataTables.responsive.min.js", "~/Scripts/DataTables/responsive.bootstrap.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/userpluginjs").Include("~/Scripts/jquery.noty.packaged.min.js", "~/Scripts/custom.js"));
             bundles.Add(new ScriptBundle("~/bundles/User").Include("~/Scripts/CustomJs/User.js"));
+            bundles.Add(new ScriptBundle("~/bundles/AppObject").Include("~/Scripts/CustomJs/AppObject.js"));
 
 
 

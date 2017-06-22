@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Newtonsoft.Json;
 using SAMTool.BusinessServices.Contracts;
 using SAMTool.DataAccessObject.DTO;
 using SAMTool.UI.Models;
@@ -13,10 +14,11 @@ namespace SAMTool.UI.Controllers
     public class AppObjectController : Controller
     {
         IApplicationBusiness _applicationBusiness;
-        public AppObjectController(IApplicationBusiness applicationBusiness)
+        IAppObjectBusiness _appObjectBusiness;
+        public AppObjectController(IApplicationBusiness applicationBusiness,IAppObjectBusiness appObjectBusiness)
         {
             _applicationBusiness = applicationBusiness;
-
+            _appObjectBusiness = appObjectBusiness;
         }
         // GET: AppObject
         public ActionResult Index()
@@ -38,6 +40,13 @@ namespace SAMTool.UI.Controllers
             _appObjectViewModelObj.ApplicationList = selectListItem;
             return View(_appObjectViewModelObj);
         }
+        [HttpGet]
+        public string GetAllAppObjects(string id)
+        {
+            List<AppObjectViewModel> ItemList = Mapper.Map<List<AppObject>, List<AppObjectViewModel>>(_appObjectBusiness.GetAllAppObjects(Guid.Parse(id)));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
+
+        }
         #region ButtonStyling
         [HttpGet]
         public ActionResult ChangeButtonStyle(string ActionType)
@@ -50,7 +59,10 @@ namespace SAMTool.UI.Controllers
                     ToolboxViewModelObj.addbtn.Text = "Add";
                     ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
-
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
 
 
                     break;
