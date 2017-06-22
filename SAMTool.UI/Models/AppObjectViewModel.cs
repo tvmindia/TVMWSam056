@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace SAMTool.UI.Models
 {
@@ -11,5 +12,6 @@ namespace SAMTool.UI.Models
         public Guid AppID { get; set; }
         public string ObjectName { get; set; }
         public CommonViewModel commonViewDetails { get; set; }
+        public List<SelectListItem> ApplicationList { get; set; }
     }
 }
