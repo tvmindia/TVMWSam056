@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SAMTool.DataAccessObject.DTO
+namespace SAMTool.UI.Models
 {
-    public class Common
+    public class CommonViewModel
     {
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
