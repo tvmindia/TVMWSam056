@@ -525,6 +525,7 @@
     <Content Include="Views\User\User.cshtml" />
     <Content Include="Views\Application\Application.cshtml" />
     <Content Include="Views\Roles\Roles.cshtml" />
+    <Content Include="Views\AppObject\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -534,8 +535,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AppObject\" />
-    <Folder Include="Views\Roles\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAMTool.BusinessServices\SAMTool.BusinessServices.csproj">
