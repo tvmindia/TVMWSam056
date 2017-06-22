@@ -1,4 +1,7 @@
-﻿using SAMTool.BusinessServices.Contracts;
+﻿using AutoMapper;
+using SAMTool.BusinessServices.Contracts;
+using SAMTool.DataAccessObject.DTO;
+using SAMTool.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +14,22 @@ namespace SAMTool.UI.Controllers
     {
 
         private IUserBusiness _userBusiness;
-        
-        public UserController(IUserBusiness userBusiness)
+        private IRolesBusiness _rolesBusiness;
+
+
+        public UserController(IUserBusiness userBusiness,IRolesBusiness rolesBusiness)
         {
             _userBusiness = userBusiness;
+            _rolesBusiness = rolesBusiness;
         }
 
         // GET: User
         public ActionResult User()
         {
-            return View();
+
+            UserViewModel userobj = new UserViewModel();
+            userobj.RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllRoles());
+            return View(userobj); 
         }
     }
 }

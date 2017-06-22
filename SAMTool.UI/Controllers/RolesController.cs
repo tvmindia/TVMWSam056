@@ -28,9 +28,9 @@ namespace SAMTool.UI.Controllers
             return View();
         }
 
-        #region GetAllRolesBySC
+        #region GetAllRolesByApplication
         [HttpGet] 
-        public string GetAllRolesBySC(string SCCode)
+        public string GetAllRoles(string AppId)
         {
             try
             {
@@ -43,6 +43,6 @@ namespace SAMTool.UI.Controllers
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
         }
-        #endregion GetAllRolesBySC
+        #endregion GetAllRolesByApplication
     }
 }

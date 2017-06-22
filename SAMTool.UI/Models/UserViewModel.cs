@@ -18,7 +18,7 @@ namespace SAMTool.UI.Models
         [Display(Name = "Login Name")]
         public string LoginName { get; set; }
 
-        [Display(Name = "Active(Yes/No)")]
+        [Display(Name = "Active")]
         public bool Active { get; set; }
 
         [Required(ErrorMessage = "Please enter email")]
@@ -39,7 +39,7 @@ namespace SAMTool.UI.Models
 
         public string RoleCSV { get; set; }
 
-        [Display(Name = "Related Categories")]
+        [Display(Name = "Select Roles")]
         public List<RolesViewModel> RoleList { get; set; }
 
     }
