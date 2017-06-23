@@ -46,8 +46,9 @@ namespace SAMTool.RepositoryServices.Services
                                         _rolesObj.LoginName = (sdr["LoginName"].ToString() != "" ? sdr["LoginName"].ToString() : _rolesObj.LoginName);
                                         _rolesObj.UserName = (sdr["UserName"].ToString() != "" ? sdr["UserName"].ToString() : _rolesObj.UserName);
                                         _rolesObj.Active = (sdr["Active"].ToString() != "" ? Boolean.Parse(sdr["Active"].ToString()) : _rolesObj.Active);
-                                        _rolesObj.Email = (sdr["Email"].ToString() != "" ? sdr["Email"].ToString() : _rolesObj.UserName);
-                                        //_rolesObj.RoleCSV= (sdr["Email"].ToString() != "" ? sdr["Email"].ToString() : _rolesObj.RoleCSV);
+                                        _rolesObj.Email = (sdr["emailID"].ToString() != "" ? sdr["emailID"].ToString() : _rolesObj.UserName);
+                                        _rolesObj.RoleCSV= (sdr["RoleList"].ToString() != "" ? sdr["RoleList"].ToString() : _rolesObj.RoleCSV);
+                                        _rolesObj.RoleIDCSV = (sdr["RoleListID"].ToString() != "" ? sdr["RoleListID"].ToString() : _rolesObj.RoleIDCSV);
                                     }
                                     UserList.Add(_rolesObj);
                                 }
@@ -63,6 +64,118 @@ namespace SAMTool.RepositoryServices.Services
             }
 
             return UserList;
+        }
+
+        public object InsertUser(User userObj)
+        {
+            SqlParameter outParameter = null;
+            SqlParameter outParameter2 = null;
+            try
+            {
+
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[InsertUser]";
+                        cmd.CommandType = CommandType.StoredProcedure;  
+                        cmd.Parameters.Add("@UserName", SqlDbType.NVarChar, 250).Value = userObj.UserName;
+                        cmd.Parameters.Add("@LoginName", SqlDbType.NVarChar, 250).Value = userObj.LoginName;
+                        cmd.Parameters.Add("@Password", SqlDbType.NVarChar, 250).Value = userObj.Password;
+                        cmd.Parameters.Add("@Active", SqlDbType.Bit).Value = userObj.Active;
+                        cmd.Parameters.Add("@RoleList", SqlDbType.NVarChar, -1).Value = userObj.RoleCSV;
+                        cmd.Parameters.Add("@EmailID", SqlDbType.NVarChar, 250).Value = userObj.Email;
+                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = "Gibin"; //userObj.logDetails.CreatedBy;
+                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Now;//userObj.logDetails.CreatedDate;
+
+                        outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                        outParameter2 = cmd.Parameters.Add("@UserID", SqlDbType.UniqueIdentifier);
+                        outParameter2.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            switch (outParameter.Value.ToString())
+            {
+                case "1":
+                    return new
+                    {
+                        ID = Guid.Parse(outParameter2.Value.ToString()),
+                        Status = outParameter.Value.ToString(),
+                        Message = "Insert Success"
+                    };
+                default:
+                    return new
+                    {
+                        Status = outParameter.Value.ToString(),
+                        Message = "Insert Failure"
+                    };
+            }
+        }
+
+        public object UpdateUser(User userObj)
+        {
+            SqlParameter outParameter = null; 
+            try
+            {
+
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[UpdateUser]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@UserID", SqlDbType.UniqueIdentifier).Value = userObj.ID;
+                        cmd.Parameters.Add("@UserName", SqlDbType.NVarChar, 250).Value = userObj.@UserName;
+                        cmd.Parameters.Add("@LoginName", SqlDbType.NVarChar, 250).Value = userObj.LoginName;
+                        cmd.Parameters.Add("@Password", SqlDbType.NVarChar, 250).Value = userObj.Password;
+                        cmd.Parameters.Add("@Active", SqlDbType.Bit).Value = userObj.Active;
+                        cmd.Parameters.Add("@RoleList", SqlDbType.NVarChar, -1).Value = userObj.RoleCSV;
+                        cmd.Parameters.Add("@EmailID", SqlDbType.NVarChar, 250).Value = userObj.Email;
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = "Gibin"; //userObj.logDetails.CreatedBy;
+                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now;//userObj.logDetails.CreatedDate;
+
+                        outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output; 
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            switch (outParameter.Value.ToString())
+            {
+                case "1":
+                    return new
+                    { 
+                        Status = outParameter.Value.ToString(),
+                        Message = "Update Success"
+                    };
+                default:
+                    return new
+                    {
+                        Status = outParameter.Value.ToString(),
+                        Message = "Update Failure"
+                    };
+            }
+
         }
     }
 }

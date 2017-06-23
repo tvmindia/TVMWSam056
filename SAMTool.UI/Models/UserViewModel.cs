@@ -38,6 +38,7 @@ namespace SAMTool.UI.Models
 
 
         public string RoleCSV { get; set; }
+        public string RoleIDCSV { get; set; }
 
         [Display(Name = "Select Roles")]
         public List<RolesViewModel> RoleList { get; set; }

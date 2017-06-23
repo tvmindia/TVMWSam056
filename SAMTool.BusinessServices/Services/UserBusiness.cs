@@ -30,5 +30,49 @@ namespace SAMTool.BusinessServices.Services
             }
             return UserList;
         }
+
+        public User GetUserDetailsByID(string id)
+        {
+            List<User> UserList = null;
+         
+            try
+            {
+                UserList = _userRepository.GetAllUsers();
+                UserList = UserList.Where(j => j.ID==Guid.Parse(id)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return UserList[0];
+        }
+
+        public object InsertUser(User userObj)
+        {
+            object result = null;
+            try
+            {
+                result = _userRepository.InsertUser(userObj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        public object UpdateUser(User userObj)
+        {
+            object result = null;
+            try
+            {
+                result = _userRepository.UpdateUser(userObj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
     }
 }
