@@ -41,119 +41,119 @@ var appAddress = window.location.protocol + "//" + window.location.host + "/";  
 ////})();
 
 
-//$(document).ready(function () {
+$(document).ready(function () {
  
-//    //$('input.datepicker').datepicker({
-//    //    format: "dd-M-yyyy",//",
-//    //    maxViewMode: 0,
-//    //    todayBtn: "linked",
-//    //    clearBtn: true,
-//    //    autoclose: true,
-//    //    todayHighlight: true
-//    //});
+    $('input.datepicker').datepicker({
+        format: "dd-M-yyyy",//",
+        maxViewMode: 0,
+        todayBtn: "linked",
+        clearBtn: true,
+        autoclose: true,
+        todayHighlight: true
+    });
    
-//    //$('input').keydown(function (e) {
-//    //    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
-//    //    if (key == 13) {
-//    //        e.preventDefault();
-//    //        var inputs = $(this).closest('form').find(':input:visible');
-//    //        inputs.eq(inputs.index(this) + 1).focus();
-//    //    }
-//    //});
+    //$('input').keydown(function (e) {
+    //    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+    //    if (key == 13) {
+    //        e.preventDefault();
+    //        var inputs = $(this).closest('form').find(':input:visible');
+    //        inputs.eq(inputs.index(this) + 1).focus();
+    //    }
+    //});
    
-//    ////menu submenu popup on click 3rd level menus
-//    //$('.navbar a.dropdown-toggle').on('click', function (e) {
-//    //    var $el = $(this);
-//    //    var $parent = $(this).offsetParent(".dropdown-menu");
-//    //    $(this).parent("li").toggleClass('open');
+    //menu submenu popup on click 3rd level menus
+    //$('.navbar a.dropdown-toggle').on('click', function (e) {
+    //    var $el = $(this);
+    //    var $parent = $(this).offsetParent(".dropdown-menu");
+    //    $(this).parent("li").toggleClass('open');
 
-//    //    if (!$parent.parent().hasClass('nav')) {
-//    //        $el.next().css({ "top": $el[0].offsetTop, "left": $parent.outerWidth() - 4 });
-//    //    }
+    //    if (!$parent.parent().hasClass('nav')) {
+    //        $el.next().css({ "top": $el[0].offsetTop, "left": $parent.outerWidth() - 4 });
+    //    }
 
-//    //    $('.nav li.open').not($(this).parents("li")).removeClass("open");
+    //    $('.nav li.open').not($(this).parents("li")).removeClass("open");
 
-//    //    return false;
-//    //});
+    //    return false;
+    //});
    
-//    //$(".dropdown, .btn-group").hover(function () {
+    //$(".dropdown, .btn-group").hover(function () {
        
-//    //    var dropdownMenu = $(this).children(".dropdown-menu");
-//    //    if (dropdownMenu.is(":visible")) {
-//    //        dropdownMenu.parent().toggleClass("open");
-//    //    }
-//    //});
+    //    var dropdownMenu = $(this).children(".dropdown-menu");
+    //    if (dropdownMenu.is(":visible")) {
+    //        dropdownMenu.parent().toggleClass("open");
+    //    }
+    //});
 
-//    //$('.BlockEnter').keydown(function (e) {
+    $('.BlockEnter').keydown(function (e) {
     
-//    //    try {
-//    //        if (e.which === 13) {
-//    //            var index = $('.BlockEnter').index(this) + 1;
-//    //            $('.BlockEnter').eq(index).focus();
-//    //            e.preventDefault();
+        try {
+            if (e.which === 13) {
+                var index = $('.BlockEnter').index(this) + 1;
+                $('.BlockEnter').eq(index).focus();
+                e.preventDefault();
                 
-//    //            return false;
-//    //        }
-//    //    } catch (e) {
+                return false;
+            }
+        } catch (e) {
 
-//    //    }
+        }
 
-//    //});
+    });
    
-//});
+});
 
-//function notyAlert(type, msgtxt,title) {
-//    var t = '';
-//    if (title == undefined) {
-//        t = type;
-//    }
-//    else {
-//        t = title;
-//    }
+function notyAlert(type, msgtxt,title) {
+    var t = '';
+    if (title == undefined) {
+        t = type;
+    }
+    else {
+        t = title;
+    }
 
-//    swal({ title: t, text: msgtxt, type: type, timer: 6000 });
-//    //var n = noty({
-//    //    text: msgtxt,
-//    //    type: type,//'alert','information','error','warning','notification','success'
-//    //    dismissQueue: true,
-//    //    timeout: 3000,
-//    //    layout: 'center',
-//    //    theme: 'defaultTheme',//closeWith: ['click'],
-//    //    maxVisible: 5
-//    //});
+    swal({ title: t, text: msgtxt, type: type, timer: 6000 });
+    //var n = noty({
+    //    text: msgtxt,
+    //    type: type,//'alert','information','error','warning','notification','success'
+    //    dismissQueue: true,
+    //    timeout: 3000,
+    //    layout: 'center',
+    //    theme: 'defaultTheme',//closeWith: ['click'],
+    //    maxVisible: 5
+    //});
    
-//}
+}
 
-//function SelectAllValue(e) {
-//    $(e).select();
-//}
-//function PostDataToServer(page, formData, callback)
-//{
-//   $.ajax({
-//        type: "POST",
-//        url: appAddress+page,
-//        async: true,
-//        data: formData,
-//        beforeSend: function () {
-//            showLoader();
-//        },
-//        cache: false,
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: function (data) {
-//            callback(data);
-//        },
-//        error: function (jqXHR, textStatus, errorThrown) {
-//            notyAlert('error', errorThrown + ',' + textStatus + ',' + jqXHR.statusText);
-//        },
-//        complete:function()
-//        {
-//            hideLoader();
-//        }
+function SelectAllValue(e) {
+    $(e).select();
+}
+function PostDataToServer(page, formData, callback)
+{
+   $.ajax({
+        type: "POST",
+        url: appAddress+page,
+        async: true,
+        data: formData,
+        beforeSend: function () {
+            showLoader();
+        },
+        cache: false,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            callback(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            notyAlert('error', errorThrown + ',' + textStatus + ',' + jqXHR.statusText);
+        },
+        complete:function()
+        {
+            hideLoader();
+        }
 
-//    });
+    });
     
-//}
+}
 
 
 function GetDataFromServer(page, formData) {
@@ -195,10 +195,10 @@ function ChangeButtonPatchView(Controller,Dom, Action) {
     $("#" + Dom).html(ds);
 }
 
-//function NetworkFailure(data, status, xhr) {
-//    var i = JSON.parse(data)
-//    notyAlert('error', status);
-//}
+function NetworkFailure(data, status, xhr) {
+    var i = JSON.parse(data)
+    notyAlert('error', status);
+}
 
 
 ////Common function for clearing input fields
@@ -229,32 +229,32 @@ function ChangeButtonPatchView(Controller,Dom, Action) {
 //}
 
 
-//function notyConfirm(msg, functionIfSuccess,msg2,btnText,value) {
-//    var m = 'You will not be able to recover this action!'
-//    if (msg2 != undefined) {
-//        m = msg2 + '  ' + m;
-//    }
-//    if (value == 1)
-//    {
-//        m = '';
-//    }
-//    if (btnText == undefined)
-//    {
-//        btnText = "Yes, delete it!";
-//    }
-//    swal({
-//        title: msg,
-//        text: m,
-//        type: "warning",
-//        showCancelButton: true,
-//        confirmButtonColor: "#DD6B55",
-//        confirmButtonText: btnText,
-//        closeOnConfirm: false
-//    },
-//function () {
-//    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
-//    eval(functionIfSuccess );
-//});
+function notyConfirm(msg, functionIfSuccess,msg2,btnText,value) {
+    var m = 'You will not be able to recover this action!'
+    if (msg2 != undefined) {
+        m = msg2 + '  ' + m;
+    }
+    if (value == 1)
+    {
+        m = '';
+    }
+    if (btnText == undefined)
+    {
+        btnText = "Yes, delete it!";
+    }
+    swal({
+        title: msg,
+        text: m,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: btnText,
+        closeOnConfirm: false
+    },
+function () {
+    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+    eval(functionIfSuccess );
+});
 
 
 //    //var text = '<div class="confirmbox"><span class="confirmboxHead">Delete Alert !</span><br/><br/><span class="confirmboxMsg">' + msg + '</span><br/><br/><span class="confirmboxFooter">You cannot reverse this action</span><div>'
@@ -282,7 +282,7 @@ function ChangeButtonPatchView(Controller,Dom, Action) {
 //    //    ]
 //    //})
 
-//}
+}
 
 
 //function Logout() {

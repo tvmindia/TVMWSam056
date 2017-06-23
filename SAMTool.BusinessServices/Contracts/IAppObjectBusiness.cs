@@ -9,5 +9,6 @@ namespace SAMTool.BusinessServices.Contracts
     public interface IAppObjectBusiness
     {
         List<AppObject> GetAllAppObjects(Guid id);
+        AppObject InsertUpdate(AppObject AppObjList);
     }
 }

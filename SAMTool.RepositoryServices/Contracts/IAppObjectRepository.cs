@@ -9,5 +9,7 @@ namespace SAMTool.RepositoryServices.Contracts
     public interface IAppObjectRepository
     {
         List<AppObject> GetAllAppObjects(Guid id);
+        AppObject InsertObject(AppObject AppObjectObj);
+        AppObject UpdateObject(AppObject AppObjectObj);
     }
 }

@@ -13,6 +13,7 @@ namespace SAMTool.UI.Controllers
 {
     public class AppObjectController : Controller
     {
+        Const c = new Const();
         IApplicationBusiness _applicationBusiness;
         IAppObjectBusiness _appObjectBusiness;
         public AppObjectController(IApplicationBusiness applicationBusiness,IAppObjectBusiness appObjectBusiness)
@@ -27,7 +28,6 @@ namespace SAMTool.UI.Controllers
             List<SelectListItem> selectListItem = new List<SelectListItem>();
             selectListItem = new List<SelectListItem>();
             List<ApplicationViewModel> ApplicationList = Mapper.Map<List<Application>, List<ApplicationViewModel>>(_applicationBusiness.GetAllApplication());
-            //ApplicationList = ApplicationList == null ? null : ApplicationList.OrderBy(attset => attset.).ToList();
             foreach (ApplicationViewModel Appl in ApplicationList)
             {
                 selectListItem.Add(new SelectListItem
@@ -47,6 +47,34 @@ namespace SAMTool.UI.Controllers
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
 
         }
+        [HttpPost]
+        public string InserUpdateObject(AppObjectViewModel AppObjectObj)
+        {
+            string result = "";
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    AppObjectObj.commonDetails = new CommonViewModel();
+                    AppObjectObj.commonDetails.CreatedBy = "Thomson";
+                    AppObjectObj.commonDetails.CreatedDate = DateTime.Now;
+                    AppObjectObj.commonDetails.UpdatedBy = "Thomson";
+                    AppObjectObj.commonDetails.UpdatedDate = DateTime.Now;
+                    AppObjectViewModel r = Mapper.Map<AppObject, AppObjectViewModel>(_appObjectBusiness.InsertUpdate(Mapper.Map<AppObjectViewModel, AppObject>(AppObjectObj)));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Message =c.InsertSuccess, Records = r });
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                ConstMessage cm = c.GetMessage(ex.Message);
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
+            }
+            return result;
+        }
         #region ButtonStyling
         [HttpGet]
         public ActionResult ChangeButtonStyle(string ActionType)
@@ -56,73 +84,79 @@ namespace SAMTool.UI.Controllers
             {
                 case "List":
                     ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Disable = true;
+                    ToolboxViewModelObj.addbtn.DisableReason = "No Application selected";
                     ToolboxViewModelObj.addbtn.Text = "Add";
                     ToolboxViewModelObj.addbtn.Title = "Add New";
-                    ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
+                    ToolboxViewModelObj.addbtn.Event = "AddNewObject()";
+
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back to list";
                     ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
 
+                    ToolboxViewModelObj.savebtn.Visible = true;
+                    ToolboxViewModelObj.savebtn.Disable = true;
+                    ToolboxViewModelObj.savebtn.Title = "Save Object";
+                    ToolboxViewModelObj.savebtn.Text = "Save";
+                    ToolboxViewModelObj.savebtn.DisableReason = "No Application selected";
+                    ToolboxViewModelObj.savebtn.Event = "";
+
+                    ToolboxViewModelObj.resetbtn.Visible = true;
+                    ToolboxViewModelObj.resetbtn.Disable = true;
+                    ToolboxViewModelObj.resetbtn.Title = "Reset Object";
+                    ToolboxViewModelObj.resetbtn.Text = "Reset";
+                    ToolboxViewModelObj.resetbtn.DisableReason = "No Application selected";
+                    ToolboxViewModelObj.resetbtn.Event = "";
+                    break;
+                case "select":
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Text = "Add";
+                    ToolboxViewModelObj.addbtn.Title = "Add New";
+                    ToolboxViewModelObj.addbtn.Event = "AddNewObject()";
+
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
+
+                    ToolboxViewModelObj.savebtn.Visible = true;
+                    ToolboxViewModelObj.savebtn.Disable = true;
+                    ToolboxViewModelObj.savebtn.Title = "Save Object";
+                    ToolboxViewModelObj.savebtn.Text = "Save";
+                    ToolboxViewModelObj.savebtn.DisableReason = "No Application selected";
+                    ToolboxViewModelObj.savebtn.Event = "";
+
+                    ToolboxViewModelObj.resetbtn.Visible = true;
+                    ToolboxViewModelObj.resetbtn.Disable = true;
+                    ToolboxViewModelObj.resetbtn.Title = "Reset Object";
+                    ToolboxViewModelObj.resetbtn.Text = "Reset";
+                    ToolboxViewModelObj.resetbtn.DisableReason = "No Application selected";
+                    ToolboxViewModelObj.resetbtn.Event = "";
 
                     break;
                 case "Edit":
-                    ToolboxViewModelObj.backbtn.Visible = true;
-                    ToolboxViewModelObj.backbtn.Text = "Back";
-                    ToolboxViewModelObj.backbtn.Title = "Back to list";
-                    ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
-
                     ToolboxViewModelObj.addbtn.Visible = true;
-                    ToolboxViewModelObj.addbtn.Text = "New";
-                    ToolboxViewModelObj.addbtn.Title = "Add New ICR Bill";
-                    ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
-
-                    ToolboxViewModelObj.savebtn.Visible = true;
-                    ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save ICR Bill";
-                    ToolboxViewModelObj.savebtn.Event = "save();";
-
-                    ToolboxViewModelObj.deletebtn.Visible = true;
-                    ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete ICR Bill";
-                    ToolboxViewModelObj.deletebtn.Event = "DeleteClick();";
-
-                    ToolboxViewModelObj.resetbtn.Visible = true;
-                    ToolboxViewModelObj.resetbtn.Text = "Reset";
-                    ToolboxViewModelObj.resetbtn.Title = "Reset";
-                    ToolboxViewModelObj.resetbtn.Event = "reset();";
-
-                    break;
-                case "Add":
-                    ToolboxViewModelObj.backbtn.Visible = true;
-                    ToolboxViewModelObj.backbtn.Text = "Back";
-                    ToolboxViewModelObj.backbtn.Title = "Back to list";
-                    ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
-
-
-                    ToolboxViewModelObj.addbtn.Visible = true;
-                    ToolboxViewModelObj.addbtn.Disable = true;
-                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new ICR Entry";
-                    ToolboxViewModelObj.addbtn.Text = "New";
+                    ToolboxViewModelObj.addbtn.Text = "Add";
                     ToolboxViewModelObj.addbtn.Title = "Add New";
-                    ToolboxViewModelObj.addbtn.Event = "";
+                    ToolboxViewModelObj.addbtn.Event = "AddNewObject()";
+
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    ToolboxViewModelObj.backbtn.Event = "";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
+                    ToolboxViewModelObj.savebtn.Title = "Save Object";
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save ICR Bill";
-                    ToolboxViewModelObj.savebtn.Event = "save();";
-
-                    ToolboxViewModelObj.deletebtn.Visible = true;
-                    ToolboxViewModelObj.deletebtn.Disable = true;
-                    ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete ICR";
-                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new ICR Entry";
-                    ToolboxViewModelObj.deletebtn.Event = "";
+                    ToolboxViewModelObj.savebtn.Event = "$('#btnSave').trigger('click');";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
+                    ToolboxViewModelObj.resetbtn.Disable = true;
+                    ToolboxViewModelObj.resetbtn.Title = "Reset Object";
                     ToolboxViewModelObj.resetbtn.Text = "Reset";
-                    ToolboxViewModelObj.resetbtn.Title = "Reset";
-                    ToolboxViewModelObj.resetbtn.Event = "reset();";
+                    ToolboxViewModelObj.resetbtn.DisableReason = "No Application selected";
+                    ToolboxViewModelObj.resetbtn.Event = "";
 
                     break;
                 case "AddSub":
