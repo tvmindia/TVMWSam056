@@ -10,5 +10,9 @@ namespace SAMTool.BusinessServices.Contracts
      public interface IUserBusiness
     {
         List<User> GetAllUsers();
+        object InsertUser(User userObj);
+        object UpdateUser(User userObj);
+       User GetUserDetailsByID(string id);
+        object DeleteUser(User userObj);
     }
 }
