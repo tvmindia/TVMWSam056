@@ -16,5 +16,7 @@ namespace SAMTool.DataAccessObject.DTO
         public string RoleName { get; set; }
  
         public string RoleDescription { get; set; }
+
+        public Common commonDetails { get; set; }
     }
 }

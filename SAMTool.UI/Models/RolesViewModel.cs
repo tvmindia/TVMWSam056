@@ -27,5 +27,7 @@ namespace SAMTool.UI.Models
 
         public List<SelectListItem> ApplicationList { get; set; }
 
+        public CommonViewModel commonDetails { get; set; }
+
     }
 }

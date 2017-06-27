@@ -43,5 +43,7 @@ namespace SAMTool.UI.Models
         [Display(Name = "Select Roles")]
         public List<RolesViewModel> RoleList { get; set; }
 
+        public CommonViewModel commonDetails { get; set; }
+
     }
 }

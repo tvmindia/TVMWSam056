@@ -13,5 +13,7 @@ namespace SAMTool.UI.Models
         [Required(ErrorMessage = "Please Enter Application name")]
         [Display(Name = "Application Name")]
         public string Name { get; set; }
+
+        public CommonViewModel commonDetails { get; set; }
     }
 }
