@@ -32,6 +32,7 @@ $(document).ready(function () {
 function ChangeObjectData(this_obj)
 {
     debugger;
+    $('#formEdit').hide(500);
     $('#hdnAppID').val(this_obj.value);
     ChangeButtonPatchView("AppObject", "btnAppObjectPatch", "select");
     DataTables.ObjectTable.clear().rows.add(GetAllAppObjects(this_obj.value)).draw(false);
