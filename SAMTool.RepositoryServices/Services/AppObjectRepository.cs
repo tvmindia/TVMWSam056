@@ -111,7 +111,7 @@ namespace SAMTool.RepositoryServices.Services
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return AppObjectObj;
         }
@@ -119,7 +119,7 @@ namespace SAMTool.RepositoryServices.Services
         {
             try
             {
-                SqlParameter outputStatus, outputID = null;
+                SqlParameter outputStatus;
                 using (SqlConnection con = _databaseFactory.GetDBConnection())
                 {
                     using (SqlCommand cmd = new SqlCommand())
@@ -129,17 +129,16 @@ namespace SAMTool.RepositoryServices.Services
                             con.Open();
                         }
                         cmd.Connection = con;
-                        cmd.CommandText = "[InsertObject]";
+                        cmd.CommandText = "[UpdateObject]";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@AppID", SqlDbType.NVarChar, 5).Value = AppObjectObj.AppID;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = AppObjectObj.ID;
+                        cmd.Parameters.Add("@AppID", SqlDbType.UniqueIdentifier).Value = AppObjectObj.AppID;
                         cmd.Parameters.Add("@ObjectName", SqlDbType.NVarChar, 20).Value = AppObjectObj.ObjectName;
-                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = AppObjectObj.commonDetails.CreatedBy;
-                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = AppObjectObj.commonDetails.CreatedDate;
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = AppObjectObj.commonDetails.UpdatedBy;
+                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = AppObjectObj.commonDetails.UpdatedDate;
 
                         outputStatus = cmd.Parameters.Add("@Status", SqlDbType.SmallInt);
                         outputStatus.Direction = ParameterDirection.Output;
-                        outputID = cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
-                        outputID.Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
 
 
@@ -152,7 +151,7 @@ namespace SAMTool.RepositoryServices.Services
                         Const Cobj = new Const();
                         throw new Exception(Cobj.InsertFailure);
                     case "1":
-                        AppObjectObj.ID = new Guid(outputID.Value.ToString());
+                        //AppObjectObj.ID = new Guid(outputID.Value.ToString());
 
                         break;
                     default:
@@ -162,7 +161,51 @@ namespace SAMTool.RepositoryServices.Services
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
+            }
+            return AppObjectObj;
+        }
+        public AppObject DeleteObject(AppObject AppObjectObj)
+        {
+            try
+            {
+                SqlParameter outputStatus;
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[DeleteObject]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = AppObjectObj.ID;
+                        cmd.Parameters.Add("@AppID", SqlDbType.UniqueIdentifier).Value = AppObjectObj.AppID;
+                        outputStatus = cmd.Parameters.Add("@Status", SqlDbType.SmallInt);
+                        outputStatus.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                switch (outputStatus.Value.ToString())
+                {
+                    case "0":
+                        Const Cobj = new Const();
+                        throw new Exception(Cobj.DeleteFailure);
+                    case "1":
+                        //AppObjectObj.ID = new Guid(outputID.Value.ToString());
+
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             return AppObjectObj;
         }

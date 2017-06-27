@@ -48,6 +48,28 @@ namespace SAMTool.UI.Controllers
 
         }
         [HttpPost]
+        public string DeleteObject(AppObjectViewModel AppObjectObj)
+        {
+            string result = "";
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    AppObjectViewModel r = Mapper.Map<AppObject, AppObjectViewModel>(_appObjectBusiness.DeleteObject(Mapper.Map<AppObjectViewModel, AppObject>(AppObjectObj)));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess, Records = r });
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                ConstMessage cm = c.GetMessage(ex.Message);
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
+            }
+            return result;
+        }
+        [HttpPost]
         public string InserUpdateObject(AppObjectViewModel AppObjectObj)
         {
             string result = "";

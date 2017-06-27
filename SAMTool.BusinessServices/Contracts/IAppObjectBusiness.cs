@@ -10,5 +10,6 @@ namespace SAMTool.BusinessServices.Contracts
     {
         List<AppObject> GetAllAppObjects(Guid id);
         AppObject InsertUpdate(AppObject AppObjList);
+        AppObject DeleteObject(AppObject AppObjList);
     }
 }

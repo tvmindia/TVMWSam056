@@ -11,5 +11,6 @@ namespace SAMTool.RepositoryServices.Contracts
         List<AppObject> GetAllAppObjects(Guid id);
         AppObject InsertObject(AppObject AppObjectObj);
         AppObject UpdateObject(AppObject AppObjectObj);
+        AppObject DeleteObject(AppObject AppObjList);
     }
 }
