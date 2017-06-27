@@ -20,6 +20,7 @@ namespace SAMTool.UI.App_Start
                 //ReverseMap() makes it possible to map both ways.
 
                 // config.CreateMap<TempVM, Temp>().ReverseMap();
+                config.CreateMap<LoginViewModel, User>().ReverseMap();
                 config.CreateMap<HomeViewModel, Home>().ReverseMap();
                 config.CreateMap<RolesViewModel, Roles>().ReverseMap();
                 config.CreateMap<UserViewModel, User>().ReverseMap();

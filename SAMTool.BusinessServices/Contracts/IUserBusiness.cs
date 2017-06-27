@@ -12,6 +12,8 @@ namespace SAMTool.BusinessServices.Contracts
         List<User> GetAllUsers();
         object InsertUser(User userObj);
         object UpdateUser(User userObj);
-       User GetUserDetailsByID(string id);
+        User GetUserDetailsByID(string id);
+        User CheckUserCredentials(User user);
+        string GetSecurityCode(string UserName,string ProjectObject);
     }
 }

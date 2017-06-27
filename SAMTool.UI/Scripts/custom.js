@@ -43,14 +43,14 @@ var appAddress = window.location.protocol + "//" + window.location.host + "/";  
 
 $(document).ready(function () {
  
-    $('input.datepicker').datepicker({
-        format: "dd-M-yyyy",//",
-        maxViewMode: 0,
-        todayBtn: "linked",
-        clearBtn: true,
-        autoclose: true,
-        todayHighlight: true
-    });
+    //$('input.datepicker').datepicker({
+    //    format: "dd-M-yyyy",//",
+    //    maxViewMode: 0,
+    //    todayBtn: "linked",
+    //    clearBtn: true,
+    //    autoclose: true,
+    //    todayHighlight: true
+    //});
    
     //$('input').keydown(function (e) {
     //    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;

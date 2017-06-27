@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using SAMTool.BusinessServices.Contracts;
 using SAMTool.DataAccessObject.DTO;
 using SAMTool.UI.Models;
+using SAMTool.UI.SecurityFilter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace SAMTool.UI.Controllers
             _rolesBusiness = rolesBusiness;
         }
 
-        // GET: User
+        //[AuthSecurityFilter(ProjectObject = "Test", AccessMode = "G")]
+        [HttpGet]
         public  ActionResult Index()
         {
 
@@ -77,6 +79,7 @@ namespace SAMTool.UI.Controllers
         #endregion InsertUpdateEvent
 
         #region GetAllUsers
+        //[AuthSecurityFilter(ProjectObject = "Test", AccessMode = "T")]
         [HttpGet]
         public string GetAllUsers()
         {

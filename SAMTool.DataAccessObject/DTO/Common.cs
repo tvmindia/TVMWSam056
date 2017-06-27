@@ -5,6 +5,12 @@ using System.Web;
 
 namespace SAMTool.DataAccessObject.DTO
 {
+    public class UA
+    {
+        public string UserName { get; set; }
+        public DateTime DateTime { get; set; }
+    }
+
     public class Common
     {
         public string CreatedBy { get; set; }

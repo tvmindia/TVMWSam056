@@ -49,6 +49,7 @@ namespace SAMTool.RepositoryServices.Services
                                         _rolesObj.Email = (sdr["emailID"].ToString() != "" ? sdr["emailID"].ToString() : _rolesObj.UserName);
                                         _rolesObj.RoleCSV= (sdr["RoleList"].ToString() != "" ? sdr["RoleList"].ToString() : _rolesObj.RoleCSV);
                                         _rolesObj.RoleIDCSV = (sdr["RoleListID"].ToString() != "" ? sdr["RoleListID"].ToString() : _rolesObj.RoleIDCSV);
+                                        _rolesObj.Password= (sdr["Password"].ToString() != "" ? sdr["Password"].ToString() : _rolesObj.Password);
                                     }
                                     UserList.Add(_rolesObj);
                                 }

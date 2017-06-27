@@ -10,7 +10,7 @@ namespace SAMTool.UI.App_Start
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/bootstrap-theme.css", "~/Content/font-awesome.min.css", "~/Content/Custom.css", "~/Content/sweetalert.css", "~/Content/Custom.css", "~/Content/sweetalert.css"));
             bundles.Add(new StyleBundle("~/Content/bootstrapdatepicker").Include("~/Content/bootstrap-datepicker3.min.css"));         
             bundles.Add(new StyleBundle("~/Content/DataTables/css/datatable").Include("~/Content/DataTables/css/dataTables.bootstrap.min.css", "~/Content/DataTables/css/responsive.bootstrap.min.css"));
-
+            bundles.Add(new StyleBundle("~/Content/UserCSS/Login").Include("~/Content/UserCSS/Login.css"));
             /*Scripts here*/
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery-3.1.1.min.js")); 
             bundles.Add(new ScriptBundle("~/bundles/jqueryform").Include("~/Scripts/jquery.form.js"));
@@ -20,6 +20,7 @@ namespace SAMTool.UI.App_Start
             bundles.Add(new ScriptBundle("~/bundles/userpluginjs").Include("~/Scripts/jquery.noty.packaged.min.js", "~/Scripts/custom.js", "~/Scripts/sweetalert.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/User").Include("~/Scripts/CustomJs/User.js"));
             bundles.Add(new ScriptBundle("~/bundles/AppObject").Include("~/Scripts/CustomJs/AppObject.js"));
+           
 
 
 
