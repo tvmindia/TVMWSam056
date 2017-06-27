@@ -12,5 +12,6 @@ namespace SAMTool.RepositoryServices.Contracts
         List<User> GetAllUsers();
         object InsertUser(User userObj);
         object UpdateUser(User userObj);
+        object DeleteUser(User userObj);
     }
 }

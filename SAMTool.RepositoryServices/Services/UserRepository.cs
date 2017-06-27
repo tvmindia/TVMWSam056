@@ -114,6 +114,12 @@ namespace SAMTool.RepositoryServices.Services
                         Status = outParameter.Value.ToString(),
                         Message = "Insert Success"
                     };
+                case "2":
+                    return new
+                    { 
+                        Status = outParameter.Value.ToString(),
+                        Message = "Duplicate login Name"
+                    };
                 default:
                     return new
                     {
@@ -176,6 +182,51 @@ namespace SAMTool.RepositoryServices.Services
                     };
             }
 
+        }
+
+        public object DeleteUser(User userObj)
+        {
+            SqlParameter outParameter = null;
+            try
+            {
+
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[DeleteUser]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@UserID", SqlDbType.UniqueIdentifier).Value = userObj.ID;  
+                        outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            switch (outParameter.Value.ToString())
+            {
+                case "1":
+                    return new
+                    {
+                        Status = outParameter.Value.ToString(),
+                        Message = "Delete Success"
+                    };
+                default:
+                    return new
+                    {
+                        Status = outParameter.Value.ToString(),
+                        Message = "Delete Failure"
+                    };
+            }
         }
     }
 }

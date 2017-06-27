@@ -13,5 +13,6 @@ namespace SAMTool.BusinessServices.Contracts
         object InsertUser(User userObj);
         object UpdateUser(User userObj);
        User GetUserDetailsByID(string id);
+        object DeleteUser(User userObj);
     }
 }

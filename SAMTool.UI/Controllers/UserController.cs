@@ -71,7 +71,7 @@ namespace SAMTool.UI.Controllers
                         }  
                 }
             }
-            return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
+           return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
         }
 
         #endregion InsertUpdateEvent
@@ -110,6 +110,37 @@ namespace SAMTool.UI.Controllers
         }
         #endregion GetUserDetailsByID
 
+        //DeleteUser
+
+        #region DeleteUser
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public string DeleteUser(UserViewModel UserObj)
+        {
+            object result = null;
+         
+                if (UserObj.ID != Guid.Empty)
+                {
+                    try
+                    { 
+                        result = _userBusiness.DeleteUser(Mapper.Map<UserViewModel,User>(UserObj));
+                    }
+                    catch (Exception ex)
+                    {
+                        return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                    }
+                }
+                else
+                {
+                    
+                }
+           
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
+        }
+
+        #endregion DeleteUser
+
 
         #region ButtonStyling
         [HttpGet]
@@ -145,6 +176,29 @@ namespace SAMTool.UI.Controllers
                     ToolboxViewModelObj.resetbtn.Text = "Reset";
                     ToolboxViewModelObj.resetbtn.Title = "Reset";
                     ToolboxViewModelObj.resetbtn.Event = "reset();"; 
+
+                    break;
+                case "Add":
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    ToolboxViewModelObj.backbtn.Event = "Back()";
+
+                    ToolboxViewModelObj.savebtn.Visible = true;
+                    ToolboxViewModelObj.savebtn.Text = "Save";
+                    ToolboxViewModelObj.savebtn.Title = "Save";
+                    ToolboxViewModelObj.savebtn.Event = "save();";
+
+                    ToolboxViewModelObj.deletebtn.Visible = true;
+                    ToolboxViewModelObj.deletebtn.Text = "Delete";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete";
+                    ToolboxViewModelObj.deletebtn.Disable=true;
+                    ToolboxViewModelObj.deletebtn.Event = "DeleteClick()";
+
+                    ToolboxViewModelObj.resetbtn.Visible = true;
+                    ToolboxViewModelObj.resetbtn.Text = "Reset";
+                    ToolboxViewModelObj.resetbtn.Title = "Reset";
+                    ToolboxViewModelObj.resetbtn.Event = "reset();";
 
                     break;
                 default:
