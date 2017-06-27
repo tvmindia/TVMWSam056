@@ -147,7 +147,7 @@ namespace SAMTool.RepositoryServices.Services
                         cmd.CommandText = "[UpdateUser]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@UserID", SqlDbType.UniqueIdentifier).Value = userObj.ID;
-                        cmd.Parameters.Add("@UserName", SqlDbType.NVarChar, 250).Value = userObj.@UserName;
+                        cmd.Parameters.Add("@UserName", SqlDbType.NVarChar, 250).Value = userObj.UserName;
                         cmd.Parameters.Add("@LoginName", SqlDbType.NVarChar, 250).Value = userObj.LoginName;
                         cmd.Parameters.Add("@Password", SqlDbType.NVarChar, 250).Value = userObj.Password;
                         cmd.Parameters.Add("@Active", SqlDbType.Bit).Value = userObj.Active;

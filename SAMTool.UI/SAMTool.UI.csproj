@@ -540,6 +540,7 @@
     <Content Include="Views\AppObject\Index.cshtml" />
     <Content Include="Views\Shared\ToolboxView.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Application\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -549,7 +550,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Application\" />
     <Folder Include="Views\Roles\" />
   </ItemGroup>
   <ItemGroup>
