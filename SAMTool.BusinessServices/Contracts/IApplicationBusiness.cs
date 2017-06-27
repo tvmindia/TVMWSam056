@@ -10,5 +10,9 @@ namespace SAMTool.BusinessServices.Contracts
     public interface IApplicationBusiness
     {
         List<Application> GetAllApplication();
+     
+        object InsertApplication(Application appObj);
+        object UpdateApplication(Application appObj);
+        object DeleteApplication(Application appObj);
     }
 }

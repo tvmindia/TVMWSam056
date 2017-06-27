@@ -10,5 +10,9 @@ namespace SAMTool.RepositoryServices.Contracts
     public interface IRolesRepository
     {
         List<Roles> GetAllRoles();
+
+        object InsertRoles(Roles RolesObj);
+        object UpdateRoles(Roles RolesObj); 
+        object DeleteRoles(Roles RolesObj);
     }
 }

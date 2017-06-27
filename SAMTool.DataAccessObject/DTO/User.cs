@@ -17,6 +17,8 @@ namespace SAMTool.DataAccessObject.DTO
         public bool Active { get; set; }
         public string Email { get; set; }
 
+        public Common commonDetails { get; set; }
+
 
     }
 }

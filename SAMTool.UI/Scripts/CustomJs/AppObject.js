@@ -32,6 +32,7 @@ $(document).ready(function () {
 function ChangeObjectData(this_obj)
 {
     debugger;
+    $('#formEdit').hide(500);
     $('#hdnAppID').val(this_obj.value);
     ChangeButtonPatchView("AppObject", "btnAppObjectPatch", "select");
     DataTables.ObjectTable.clear().rows.add(GetAllAppObjects(this_obj.value)).draw(false);
@@ -95,6 +96,29 @@ function SaveSuccess(data, status, xhr)
 }
 function DeleteObject(this_obj)
 {
+    debugger;
     var rowData = DataTables.ObjectTable.row($(this_obj).parents('tr')).data();
-
+    $('#hdnAppIDDelete').val(rowData.AppID);
+    $('#hdnIDDelete').val(rowData.ID);
+    $('#btnDelete').click();
+}
+function DeleteSuccess(data, status, xhr) {
+    debugger;
+    var i = JSON.parse(data)
+    switch (i.Result) {
+        case "OK":
+            notyAlert('success', i.Message);            
+            DataTables.ObjectTable.clear().rows.add(GetAllAppObjects($('#hdnAppID').val())).draw(false);
+            $('#ObjectName').val('');
+            $('#hdnID').val(EmptyGuid);
+            break;
+        case "Error":
+            notyAlert('error', i.Message);
+            break;
+        case "ERROR":
+            notyAlert('error', i.Message);
+            break;
+        default:
+            break;
+    }
 }

@@ -36,7 +36,7 @@
     </div>
    
     <div id="ManageUserEditDiv" hidden="hidden" class="col-md-12">
-        @using (Ajax.BeginForm("InsertUpdateUser", "User", new AjaxOptions { HttpMethod = "POST", Confirm = "", OnSuccess = "", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "userform" }))
+        @using (Ajax.BeginForm("InsertUpdateUser", "User", new AjaxOptions { HttpMethod = "POST", Confirm = "", OnSuccess = "UserSaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "userform" }))
         {
             @Html.AntiForgeryToken()
             <div class="form-horizontal">

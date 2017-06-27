@@ -17,6 +17,20 @@ namespace SAMTool.BusinessServices.Services
             _rolesRepository = rolesRepository;
         }
 
+        public object DeleteRoles(Roles RolesObj)
+        {
+            object result = null;
+            try
+            {
+                result = _rolesRepository.DeleteRoles(RolesObj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
         public List<Roles> GetAllRoles()
         {
             List<Roles> RoleList = null;
@@ -28,8 +42,51 @@ namespace SAMTool.BusinessServices.Services
             {
                 throw ex;
             }
-            return RoleList;
-          
+            return RoleList; 
+        }
+
+        public Roles GetRolesDetailsByID(string id)
+        {
+            List<Roles> RolesList = null;
+
+            try
+            {
+                RolesList = _rolesRepository.GetAllRoles();
+                RolesList = RolesList.Where(j => j.ID == Guid.Parse(id)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return RolesList[0];
+        }
+
+        public object InsertRoles(Roles RolesObj)
+        {
+            object result = null;
+            try
+            {
+                result = _rolesRepository.InsertRoles(RolesObj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        public object UpdateRoles(Roles RolesObj)
+        {
+            object result = null;
+            try
+            {
+                result = _rolesRepository.UpdateRoles(RolesObj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
         }
     }
 }

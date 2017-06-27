@@ -543,6 +543,8 @@
     <Content Include="Views\AppObject\Index.cshtml" />
     <Content Include="Views\Shared\ToolboxView.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Application\Index.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\NotAuthorized.cshtml" />
     <None Include="Web.Debug.config">
@@ -554,8 +556,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Application\" />
-    <Folder Include="Views\Roles\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAMTool.BusinessServices\SAMTool.BusinessServices.csproj">

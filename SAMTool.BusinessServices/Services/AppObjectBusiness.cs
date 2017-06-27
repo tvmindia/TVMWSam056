@@ -31,5 +31,10 @@ namespace SAMTool.BusinessServices.Services
                 return _appObjectRepository.InsertObject(AppObjectObj);
             }
         }
+        public AppObject DeleteObject(AppObject AppObjectObj)
+        {
+            return _appObjectRepository.DeleteObject(AppObjectObj);
+        }
+
     }
 }

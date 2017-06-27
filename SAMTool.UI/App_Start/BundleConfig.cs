@@ -20,7 +20,10 @@ namespace SAMTool.UI.App_Start
             bundles.Add(new ScriptBundle("~/bundles/userpluginjs").Include("~/Scripts/jquery.noty.packaged.min.js", "~/Scripts/custom.js", "~/Scripts/sweetalert.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/User").Include("~/Scripts/CustomJs/User.js"));
             bundles.Add(new ScriptBundle("~/bundles/AppObject").Include("~/Scripts/CustomJs/AppObject.js"));
-           
+            bundles.Add(new ScriptBundle("~/bundles/Application").Include("~/Scripts/CustomJs/Application.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Roles").Include("~/Scripts/CustomJs/Roles.js"));
+
+
 
 
 
