@@ -9,6 +9,10 @@ namespace SAMTool.BusinessServices.Contracts
 {
     public interface IRolesBusiness
     { 
-        List<Roles> GetAllRoles();
+        List<Roles> GetAllRoles(); 
+        object InsertRoles(Roles RolesObj);
+        object UpdateRoles(Roles RolesObj);
+        Roles GetRolesDetailsByID(string id);
+        object DeleteRoles(Roles RolesObj);
     }
 }
