@@ -147,5 +147,19 @@ namespace SAMTool.BusinessServices.Services
             }
             return securityCode;
         }
+
+        public object DeleteUser(User userObj)
+        {
+            object result = null;
+            try
+            {
+                result = _userRepository.DeleteUser(userObj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
     }
 }
