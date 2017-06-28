@@ -75,14 +75,15 @@ function fillUser(id)
     }
     else {
         $("#Active").val('false');
-    } 
-    //bind check boxes here, by spliting Related Categories CSV
-    var CSVarray = thisObj.RoleIDCSV.split(",");
-    $('input:checkbox').prop('checked', false);
-    for (var i = 0 ; i<CSVarray.length;i++)
-    {
-        $("#Role_" + CSVarray[i].toLowerCase().trim()).prop('checked', true);
     }
+    if (thisObj.RoleIDCSV != null) {
+        //bind check boxes here, by spliting Related Categories CSV
+        var CSVarray = thisObj.RoleIDCSV.split(",");
+        $('input:checkbox').prop('checked', false);
+        for (var i = 0 ; i < CSVarray.length; i++) {
+            $("#Role_" + CSVarray[i].toLowerCase().trim()).prop('checked', true);
+        }
+    } 
     $("#Password").val('');
     $("#ConfirmPassword").val('');
 }
@@ -123,12 +124,13 @@ function Validation() {
         });
         var CSV = checked.toString();
         $("#RoleCSV").val(CSV);
-        return true;
+        //return true;
     }
-    else {
-        notyAlert('error', 'Please Checked Roles');
-        return false;
-    }
+    //else {
+    //    notyAlert('error', 'Please Checked Roles');
+    //    return false;
+    //}
+    return true;
 }
 
 function reset() {
