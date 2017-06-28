@@ -123,7 +123,7 @@
     <Compile Include="DTO\Roles.cs" />
     <Compile Include="DTO\Home.cs" />
     <Compile Include="DTO\User.cs" />
-    <Compile Include="DTO\Privilleges.cs" />
+    <Compile Include="DTO\Privileges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

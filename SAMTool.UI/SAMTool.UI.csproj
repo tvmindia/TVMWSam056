@@ -403,7 +403,7 @@
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\CustomJs\Application.js" />
     <Content Include="Scripts\CustomJs\AppObject.js" />
-    <Content Include="Scripts\CustomJs\Privilleges.js" />
+    <Content Include="Scripts\CustomJs\Privileges.js" />
     <Content Include="Scripts\CustomJs\Roles.js" />
     <Content Include="Scripts\CustomJs\User.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -518,7 +518,7 @@
     <Compile Include="Controllers\AppObjectController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PrivillegesController.cs" />
+    <Compile Include="Controllers\PrivilegesController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -527,7 +527,7 @@
     <Compile Include="Models\AppObjectViewModel.cs" />
     <Compile Include="Models\CommonViewModel.cs" />
     <Compile Include="Models\ApplicationViewModel.cs" />
-    <Compile Include="Models\PrivillegesViewModel.cs" />
+    <Compile Include="Models\PrivilegesViewModel.cs" />
     <Compile Include="Models\RolesViewModel.cs" />
     <Compile Include="Models\ToolboxViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -550,7 +550,7 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\NotAuthorized.cshtml" />
-    <Content Include="Views\Privilleges\Index.cshtml" />
+    <Content Include="Views\Privileges\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

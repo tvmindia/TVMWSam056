@@ -27,6 +27,7 @@ namespace SAMTool.UI.App_Start
                 config.CreateMap<ApplicationViewModel, Application>().ReverseMap();
                 config.CreateMap<AppObjectViewModel, AppObject>().ReverseMap();
                 config.CreateMap<CommonViewModel, Common>().ReverseMap();
+                config.CreateMap<PrivilegesViewModel, Privileges>().ReverseMap();
 
             });
         }
