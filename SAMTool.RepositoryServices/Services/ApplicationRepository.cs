@@ -154,7 +154,7 @@ namespace SAMTool.RepositoryServices.Services
                     return new
                     {
                         Status = outParameter.Value.ToString(),
-                        Message = "Duplicate login Name"
+                        Message = "Duplicate Application Name"
                     };
                 default:
                     return new

@@ -1,5 +1,6 @@
 ﻿var DataTables = {};
 var EmptyGuid = "00000000-0000-0000-0000-000000000000";
+var rowData;
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     ChangeButtonPatchView("Application", "ButtonPatchDiv", "List"); //ControllerName,id of the container div,Name of the action
@@ -31,7 +32,7 @@ $(document).ready(function () {
 });
 
 function Edit(currentObj) {
-    var rowData = DataTables.ApplicationTable.row($(currentObj).parents('tr')).data();
+    rowData = DataTables.ApplicationTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillApplication(rowData);
     }
@@ -46,16 +47,13 @@ function Add() {
     $("#ManageApplicationTableDiv").hide();
 }
 
-
 function fillApplication(thisObj) {
-
-    $("#ID").val(thisObj.ID)
-    $("#deleteId").val(thisObj.ID)
-    $("#Name").val(thisObj.Name)
-    
+    if (thisObj != "") {
+        $("#ID").val(thisObj.ID)
+        $("#deleteId").val(thisObj.ID)
+        $("#Name").val(thisObj.Name)
+    }
 }
-
-
 
 function Back() {
     $("#ID").val(EmptyGuid);
@@ -83,14 +81,13 @@ function reset() {
     //------------------------------------------//
 
     if ($("#ID").val() != EmptyGuid) {
-        ChangeButtonPatchView("Application", "ButtonPatchDiv", "Edit");
-        //fillApplication($("#ID").val());
+        ChangeButtonPatchView("Application", "ButtonPatchDiv", "Edit"); 
+        fillApplication(rowData);
     }
     else {
         ChangeButtonPatchView("Application", "ButtonPatchDiv", "Add");
         $("#ID").val(EmptyGuid);
         $("#Name").val('');
-     
     }
 }
 
@@ -155,6 +152,7 @@ function ApplicationSaveSuccess(data, status) {
                 if ($("#ID").val() == EmptyGuid) {
                     $("#ID").val(JsonResult.Records.ID);
                     $("#deleteId").val(JsonResult.Records.ID);
+                    rowData = "";
                 }
                 ChangeButtonPatchView("Application", "ButtonPatchDiv", "Edit");
                 BindAllApplication();
@@ -176,6 +174,7 @@ function DeleteSuccess(data, status) {
     switch (JsonResult.Result) {
         case "OK":
             $("#ID").val(EmptyGuid);
+            rowData = "";
             reset();
             BindAllApplication();
             notyAlert('success', JsonResult.Records.Message);
