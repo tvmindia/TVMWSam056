@@ -25,7 +25,7 @@ namespace SAMTool.UI.Controllers
             _rolesBusiness = rolesBusiness;
         }
 
-        //[AuthSecurityFilter(ProjectObject = "Test", AccessMode = "G")]
+        //[AuthSecurityFilter(ProjectObject = "User", AccessMode = "R")]
         [HttpGet]
         public  ActionResult Index()
         {
@@ -79,7 +79,7 @@ namespace SAMTool.UI.Controllers
         #endregion InsertUpdateEvent
 
         #region GetAllUsers
-        //[AuthSecurityFilter(ProjectObject = "Test", AccessMode = "T")]
+        //[AuthSecurityFilter(ProjectObject = "User", AccessMode = "R")]
         [HttpGet]
         public string GetAllUsers()
         {

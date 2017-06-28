@@ -38,7 +38,8 @@ namespace SAMTool.UI.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(loginvm);
+                    loginvm.IsFailure = true;
+                    return View("Index", loginvm);
                 }
                 uservm = Mapper.Map<User, UserViewModel>(_userBusiness.CheckUserCredentials(Mapper.Map<LoginViewModel, User>(loginvm)));
                     if (uservm != null)

@@ -90,7 +90,7 @@ namespace SAMTool.BusinessServices.Services
             try
             {
                userList = _userRepository.GetAllUsers();
-               userList = userList == null ? null : userList.Where(us => us.LoginName.ToLower() == user.LoginName.ToLower() && us.Password == Encrypt(user.Password)).Select(c => { c.Password = null; return c; }).ToList();
+               userList = userList == null ? null : userList.Where(us => us.Active==true && us.LoginName.ToLower() == user.LoginName.ToLower() && us.Password == Encrypt(user.Password)).Select(c => { c.Password = null; return c; }).ToList();
               _user = userList == null || userList.Count==0 ? null : userList[0];
             }
             catch (Exception ex)
