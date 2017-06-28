@@ -57,6 +57,11 @@ namespace SAMTool.UI.Controllers
             return View(_privillegesObj);
         }
 
+        public ActionResult PrivilegesView()
+        {
+            return View();
+        }
+
 
         #region InsertUpdatePrivileges
 

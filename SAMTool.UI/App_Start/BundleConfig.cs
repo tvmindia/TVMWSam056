@@ -23,7 +23,8 @@ namespace SAMTool.UI.App_Start
             bundles.Add(new ScriptBundle("~/bundles/Application").Include("~/Scripts/CustomJs/Application.js"));
             bundles.Add(new ScriptBundle("~/bundles/Roles").Include("~/Scripts/CustomJs/Roles.js"));
             bundles.Add(new ScriptBundle("~/bundles/Privileges").Include("~/Scripts/CustomJs/Privileges.js"));
-
+            bundles.Add(new ScriptBundle("~/bundles/PrivilegesView").Include("~/Scripts/CustomJs/PrivilegesView.js"));
+            
 
 
 

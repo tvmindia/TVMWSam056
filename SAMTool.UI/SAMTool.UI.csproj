@@ -404,6 +404,7 @@
     <Content Include="Scripts\CustomJs\Application.js" />
     <Content Include="Scripts\CustomJs\AppObject.js" />
     <Content Include="Scripts\CustomJs\Privileges.js" />
+    <Content Include="Scripts\CustomJs\PrivilegesView.js" />
     <Content Include="Scripts\CustomJs\Roles.js" />
     <Content Include="Scripts\CustomJs\User.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -551,6 +552,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\NotAuthorized.cshtml" />
     <Content Include="Views\Privileges\Index.cshtml" />
+    <Content Include="Views\Privileges\PrivilegesView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
