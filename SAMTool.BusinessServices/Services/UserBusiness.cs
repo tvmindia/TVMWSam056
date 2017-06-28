@@ -73,6 +73,10 @@ namespace SAMTool.BusinessServices.Services
             object result = null;
             try
             {
+                if (!string.IsNullOrEmpty(userObj.Password))
+                {
+                    userObj.Password = Encrypt(userObj.Password);
+                }
                 result = _userRepository.UpdateUser(userObj);
             }
             catch (Exception ex)
