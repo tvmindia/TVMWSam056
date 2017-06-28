@@ -120,12 +120,14 @@
     <Compile Include="Contracts\IApplicationBusiness.cs" />
     <Compile Include="Contracts\IAppObjectBusiness.cs" />
     <Compile Include="Contracts\IHomeBusiness.cs" />
+    <Compile Include="Contracts\IPrivillegesBusiness.cs" />
     <Compile Include="Contracts\IRolesBusiness.cs" />
     <Compile Include="Contracts\IUserBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppObjectBusiness.cs" />
     <Compile Include="Services\ApplicationBusiness.cs" />
     <Compile Include="Services\HomeBusiness.cs" />
+    <Compile Include="Services\PrivillegesBusiness.cs" />
     <Compile Include="Services\RolesBusiness.cs" />
     <Compile Include="Services\UserBusiness.cs" />
   </ItemGroup>
