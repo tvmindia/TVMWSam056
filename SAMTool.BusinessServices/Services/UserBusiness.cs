@@ -7,16 +7,20 @@ using System.Web;
 using SAMTool.DataAccessObject.DTO;
 using System.Text;
 using System.Security.Cryptography;
+using System.Configuration;
 
 namespace SAMTool.BusinessServices.Services
 {
     public class UserBusiness : IUserBusiness
     {
         private IUserRepository _userRepository;
+        private IRolesRepository _rolesRepository;
+        Guid AppID=Guid.Parse(ConfigurationManager.AppSettings["ApplicationID"]);
         string key = System.Web.Configuration.WebConfigurationManager.AppSettings["cryptography"];
-        public UserBusiness(IUserRepository userRepository)
+        public UserBusiness(IUserRepository userRepository, IRolesRepository rolesRepository)
         {
             _userRepository = userRepository;
+            _rolesRepository = rolesRepository;
         }
 
         public List<User> GetAllUsers()
@@ -134,21 +138,23 @@ namespace SAMTool.BusinessServices.Services
             return encryptedText;
         }
 
-        public string GetSecurityCode(string UserName, string ProjectObject)
+        public string GetSecurityCode(string LoginName, string ProjectObject)
         {
             string securityCode = "";
-            switch (ProjectObject)
-            {
-                case "Test":
-                    securityCode = "RW";
-                    break;
-                case "Form8B":
-                    securityCode = "W";
-                    break;
-                case "CallandServiceTypes":
-                    securityCode = "RW";
-                    break;
-            }
+            
+            List<Roles> rolesList= _rolesRepository.GetAllRolesHeldByUser(LoginName, AppID);
+            //switch (ProjectObject)
+            //{
+            //    case "Test":
+            //        securityCode = "RW";
+            //        break;
+            //    case "Form8B":
+            //        securityCode = "W";
+            //        break;
+            //    case "CallandServiceTypes":
+            //        securityCode = "RW";
+            //        break;
+            //}
             return securityCode;
         }
 

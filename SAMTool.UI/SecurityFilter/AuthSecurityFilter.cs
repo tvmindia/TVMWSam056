@@ -13,7 +13,7 @@ namespace SAMTool.UI.SecurityFilter
 {
     public class AuthSecurityFilter : ActionFilterAttribute, IAuthenticationFilter, IAuthorizationFilter
     {
-        public string UserName { get; set; }
+        public string LoggedUserName { get; set; }
         public string ProjectObject { get; set; }
         public string AccessMode { get; set; }
         [Dependency]
@@ -49,6 +49,7 @@ namespace SAMTool.UI.SecurityFilter
 
                     filterContext.HttpContext.User = new System.Security.Principal.GenericPrincipal(
                     new System.Security.Principal.GenericIdentity(authTicket.Name, "Forms"), authTicket.UserData.Split(',').Select(t => t.Trim()).ToArray());
+                    LoggedUserName = authTicket.UserData;
                 }
             //}
             //NON AJAX CALL
@@ -108,9 +109,9 @@ namespace SAMTool.UI.SecurityFilter
         public void OnAuthorization(AuthorizationContext filterContext)
         {
             string CurrentMode = "";
-            string UserName = "";
-            UserName=filterContext.RequestContext.HttpContext.User.Identity.Name;
-            CurrentMode = _userBusiness.GetSecurityCode(UserName, ProjectObject);
+            //string UserName = "";
+            //UserName=filterContext.RequestContext.HttpContext.User.Identity.Name;
+            CurrentMode = _userBusiness.GetSecurityCode(LoggedUserName, ProjectObject);
             if (CurrentMode.Contains(AccessMode))
             {
                 //Allows Permission

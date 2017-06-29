@@ -11,6 +11,7 @@ namespace SAMTool.DataAccessObject.DTO
 
         public Guid? AppID { get; set; }
 
+        public User user { get; set; }
         public string ApplicationName { get; set; }
 
         public string RoleName { get; set; }
