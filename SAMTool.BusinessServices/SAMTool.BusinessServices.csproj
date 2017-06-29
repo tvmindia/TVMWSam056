@@ -120,6 +120,7 @@
     <Compile Include="Contracts\IApplicationBusiness.cs" />
     <Compile Include="Contracts\IAppObjectBusiness.cs" />
     <Compile Include="Contracts\IHomeBusiness.cs" />
+    <Compile Include="Contracts\IManageAccessBusiness.cs" />
     <Compile Include="Contracts\IPrivilegesBusiness.cs" />
     <Compile Include="Contracts\IRolesBusiness.cs" />
     <Compile Include="Contracts\IUserBusiness.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Services\AppObjectBusiness.cs" />
     <Compile Include="Services\ApplicationBusiness.cs" />
     <Compile Include="Services\HomeBusiness.cs" />
+    <Compile Include="Services\ManageAccessBusiness.cs" />
     <Compile Include="Services\PrivilegesBusiness.cs" />
     <Compile Include="Services\RolesBusiness.cs" />
     <Compile Include="Services\UserBusiness.cs" />

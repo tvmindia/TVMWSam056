@@ -120,6 +120,7 @@
     <Compile Include="DTO\Application.cs" />
     <Compile Include="DTO\AppObject.cs" />
     <Compile Include="DTO\Common.cs" />
+    <Compile Include="DTO\ManageAccess.cs" />
     <Compile Include="DTO\Roles.cs" />
     <Compile Include="DTO\Home.cs" />
     <Compile Include="DTO\User.cs" />
