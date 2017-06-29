@@ -15,6 +15,6 @@ namespace SAMTool.BusinessServices.Contracts
        User GetUserDetailsByID(string id);
         object DeleteUser(User userObj);
         User CheckUserCredentials(User user);
-        string GetSecurityCode(string LoginName, string ProjectObject);
+        Permission GetSecurityCode(string LoginName, string ProjectObject);
     }
 }

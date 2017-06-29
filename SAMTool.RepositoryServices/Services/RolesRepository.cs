@@ -223,55 +223,6 @@ namespace SAMTool.RepositoryServices.Services
 
         }
 
-        public List<Roles> GetAllRolesHeldByUser(string LoggedUser,Guid AppID)
-        {
-            List<Roles> roleList = null;
-            try
-            {
-                using (SqlConnection con = _databaseFactory.GetDBConnection())
-                {
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        if (con.State == ConnectionState.Closed)
-                        {
-                            con.Open();
-                        }
-                        cmd.Connection = con;
-                        cmd.CommandText = "[GetAllRolesByUser]";
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@User", SqlDbType.NVarChar, 250).Value = LoggedUser;
-                        cmd.Parameters.Add("@APPID", SqlDbType.UniqueIdentifier).Value = AppID;
-                        using (SqlDataReader sdr = cmd.ExecuteReader())
-                        {
-                            if ((sdr != null) && (sdr.HasRows))
-                            {
-                                roleList = new List<Roles>();
-                                while (sdr.Read())
-                                {
-                                    Roles _rolesObj = new Roles();
-                                    {
-                                        _rolesObj.ID = (sdr["RoleID"].ToString() != "" ? Guid.Parse(sdr["RoleID"].ToString()) : _rolesObj.ID);
-                                        _rolesObj.RoleName = (sdr["RoleName"].ToString() != "" ? sdr["RoleName"].ToString() : _rolesObj.RoleName);
-                                        _rolesObj.user = new User();
-                                        _rolesObj.user.ID = (sdr["UserID"].ToString() != "" ? Guid.Parse(sdr["UserID"].ToString()) : _rolesObj.user.ID);
-                                        _rolesObj.RoleDescription = (sdr["RoleDescription"].ToString() != "" ? sdr["RoleDescription"].ToString() : _rolesObj.RoleDescription);
-                                        _rolesObj.AppID = (sdr["AppID"].ToString() != "" ? Guid.Parse(sdr["AppID"].ToString()) : _rolesObj.AppID);
-                                        _rolesObj.ApplicationName = (sdr["AppName"].ToString() != "" ? sdr["AppName"].ToString() : _rolesObj.ApplicationName);
-                                    }
-                                    roleList.Add(_rolesObj);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return roleList;
-        }
+      
     }
 }

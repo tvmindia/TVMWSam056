@@ -14,13 +14,13 @@ namespace SAMTool.BusinessServices.Services
     public class UserBusiness : IUserBusiness
     {
         private IUserRepository _userRepository;
-        private IRolesRepository _rolesRepository;
+       
         Guid AppID=Guid.Parse(ConfigurationManager.AppSettings["ApplicationID"]);
         string key = System.Web.Configuration.WebConfigurationManager.AppSettings["cryptography"];
-        public UserBusiness(IUserRepository userRepository, IRolesRepository rolesRepository)
+        public UserBusiness(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _rolesRepository = rolesRepository;
+          
         }
 
         public List<User> GetAllUsers()
@@ -138,24 +138,19 @@ namespace SAMTool.BusinessServices.Services
             return encryptedText;
         }
 
-        public string GetSecurityCode(string LoginName, string ProjectObject)
+        public Permission GetSecurityCode(string LoginName, string ProjectObject)
         {
-            string securityCode = "";
+          
+            Permission _permission = new Permission()
+            {
+                Name = ProjectObject,
+                AccessCode= _userRepository.GetObjectAccess(LoginName, ProjectObject, AppID),
+                
+            };
+           
+               
             
-            List<Roles> rolesList= _rolesRepository.GetAllRolesHeldByUser(LoginName, AppID);
-            //switch (ProjectObject)
-            //{
-            //    case "Test":
-            //        securityCode = "RW";
-            //        break;
-            //    case "Form8B":
-            //        securityCode = "W";
-            //        break;
-            //    case "CallandServiceTypes":
-            //        securityCode = "RW";
-            //        break;
-            //}
-            return securityCode;
+            return _permission;
         }
 
         public object DeleteUser(User userObj)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using SAMTool.BusinessServices.Contracts;
+using SAMTool.DataAccessObject.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace SAMTool.UI.SecurityFilter
     {
         public string LoggedUserName { get; set; }
         public string ProjectObject { get; set; }
-        public string AccessMode { get; set; }
+        public string Mode { get; set; }
         [Dependency]
         public IUserBusiness _userBusiness { get; set; }
       
@@ -108,11 +109,11 @@ namespace SAMTool.UI.SecurityFilter
 
         public void OnAuthorization(AuthorizationContext filterContext)
         {
-            string CurrentMode = "";
+            Permission _permission =null;
             //string UserName = "";
             //UserName=filterContext.RequestContext.HttpContext.User.Identity.Name;
-            CurrentMode = _userBusiness.GetSecurityCode(LoggedUserName, ProjectObject);
-            if (CurrentMode.Contains(AccessMode))
+            _permission = _userBusiness.GetSecurityCode(LoggedUserName, ProjectObject);
+            if (_permission.AccessCode.Contains(Mode))
             {
                 //Allows Permission
             }
