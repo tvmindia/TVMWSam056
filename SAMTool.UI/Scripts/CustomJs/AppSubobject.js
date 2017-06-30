@@ -74,6 +74,13 @@ function Reset() {
 }
 
 
+
+function GoBack() {
+    debugger;
+    window.location = '/AppObject/Index?appId=' + $('#ddlApplication').val();
+}
+
+
 function SaveSuccess(data, status, xhr) {
     debugger;
     var i = JSON.parse(data)

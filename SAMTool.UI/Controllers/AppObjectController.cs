@@ -24,6 +24,12 @@ namespace SAMTool.UI.Controllers
         // GET: AppObject
         public ActionResult Index()
         {
+            if (Request.QueryString["appId"] != null)
+            {
+                string Appid = Request.QueryString["appId"].ToString();
+                ViewBag.AppID = Appid;
+            } 
+
             AppObjectViewModel _appObjectViewModelObj = new AppObjectViewModel();
             List<SelectListItem> selectListItem = new List<SelectListItem>();
             selectListItem = new List<SelectListItem>();
@@ -278,7 +284,7 @@ namespace SAMTool.UI.Controllers
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back to list";
-                    ToolboxViewModelObj.backbtn.Event = "$('#btnBack').trigger('click');";
+                    ToolboxViewModelObj.backbtn.Event = "GoBack()";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Title = "Save Object";

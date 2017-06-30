@@ -4,6 +4,7 @@ var rowData;
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
+      
         //var UserViewModel = new Object();
         DataTables.ObjectTable = $('#tblAppObjects').DataTable(
          {
@@ -29,6 +30,11 @@ $(document).ready(function () {
          });
         $('#hdnID').val(EmptyGuid);
         $('#hdnAppID').val(EmptyGuid);
+        debugger;
+        if ($('#ddlApplication').val() != "")
+        {
+            DataTables.ObjectTable.clear().rows.add(GetAllAppObjects($('#ddlApplication').val())).draw(false);
+        }
     }
     catch (e) {
         notyAlert('error', e.message);

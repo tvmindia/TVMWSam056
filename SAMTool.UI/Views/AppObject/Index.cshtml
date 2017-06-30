@@ -27,7 +27,7 @@
                         <label class="control-label">Select Application</label>
                     </div>
                     <div class="col-md-6">
-                        @Html.DropDownListFor(model => model.AppID, Model.ApplicationList, "--Select Application--", new { @class = "form-control", @onchange = "ChangeObjectData(this)",@id="ddlApplication" })
+                        @Html.DropDownListFor(model => model.AppID, Model.ApplicationList, "--Select Application--", new { @class = "form-control", @onchange = "ChangeObjectData(this)",@id="ddlApplication", Value = ViewBag.AppID })
                     </div>
                     @*<div class="col-md-1 mandatory"></div>*@
                 </div> 
