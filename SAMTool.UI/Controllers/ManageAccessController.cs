@@ -67,12 +67,27 @@ namespace SAMTool.UI.Controllers
             List<AppObjectViewModel> List = Mapper.Map<List<AppObject>, List<AppObjectViewModel>>(__appObjectBusiness.GetAllAppObjects(Guid.Parse(Appid)));
             foreach (AppObjectViewModel Appl in List)
             {
-                selectListItem.Add(new SelectListItem
+                if(Appl.ID==Guid.Parse(id))
                 {
-                    Text = Appl.ObjectName,
-                    Value = Appl.ID.ToString(),
-                    Selected = false
-                });
+                    selectListItem.Add(new SelectListItem
+                    {
+
+                        Text = Appl.ObjectName,
+                        Value = Appl.ID.ToString(),
+                        Selected = true
+                    });
+                }
+                else
+                {
+                    selectListItem.Add(new SelectListItem
+                    {
+
+                        Text = Appl.ObjectName,
+                        Value = Appl.ID.ToString(),
+                        Selected = false
+                    });
+                }
+                
             }
             _manageSubObjectAccessViewModelObj.ObjectList = selectListItem;
             selectListItem = new List<SelectListItem>();
@@ -102,8 +117,8 @@ namespace SAMTool.UI.Controllers
             string result = "";
             try
             {
-                if (ModelState.IsValid)
-                {
+               // if (ModelState.IsValid)
+              //  {
                     manageAccessViewModelObj.commonObj = new CommonViewModel();
                     manageAccessViewModelObj.commonObj.CreatedBy = "Thomson";
                     manageAccessViewModelObj.commonObj.CreatedDate = DateTime.Now;
@@ -114,7 +129,7 @@ namespace SAMTool.UI.Controllers
                     }
                     ManageAccessViewModel r = Mapper.Map<ManageAccess, ManageAccessViewModel>(_manageAccessBusiness.AddAccessChanges(Mapper.Map<List<ManageAccessViewModel>, List<ManageAccess>>(manageAccessViewModelObj.ManageAccessList)));
                     return JsonConvert.SerializeObject(new { Result = "OK", Message = c.InsertSuccess, Records = r });
-                }
+               // }
 
             }
             catch (Exception ex)
@@ -132,6 +147,7 @@ namespace SAMTool.UI.Controllers
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
 
         }
+
         [HttpPost]
         public string AddSubObjectAccessChanges(ManageSubObjectAccessViewModel manageSubObjectAccessViewModelObj)
         {
