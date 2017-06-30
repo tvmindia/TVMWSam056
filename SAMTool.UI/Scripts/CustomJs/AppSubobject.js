@@ -4,7 +4,7 @@ var rowData;
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
-        debugger;
+        debugger; 
         var SubObjectViewModel = new Object();
         DataTables.SubObjectTable = $('#tblsubObjects').DataTable(
          {
@@ -36,7 +36,8 @@ $(document).ready(function () {
 function GetAllAppObjects() {
     try {
         debugger;
-        var data = {};
+        var id = $('#ddlApplication').val()
+        var data = { "ID": id };
         var ds = {};
         ds = GetDataFromServer("AppObject/GetAllAppSubObjects/", data);
         if (ds != '') {
@@ -60,13 +61,19 @@ function EditObject(this_obj) {
     ChangeButtonPatchView("AppObject", "btnAppObjectPatch", "subEdit");
     rowData = DataTables.SubObjectTable.row($(this_obj).parents('tr')).data();
     $('#SubObjName').val(rowData.SubObjName);
-    $('#ObjectID').val(rowData.ID);
-    $('#ID').val(rowData.ID);
-
-
-
+    $('#ddlObject').val(rowData.ObjectID);
+    $('#ID').val(rowData.ID); 
 
 }
+
+function Reset() {
+    debugger;
+    $('#ID').val(EmptyGuid);
+    $('#ddlObject').val('');
+    $('#SubObjName').val('');
+}
+
+
 function SaveSuccess(data, status, xhr) {
     debugger;
     var i = JSON.parse(data)

@@ -348,7 +348,7 @@ namespace SAMTool.RepositoryServices.Services
                 {
                     case "0":
                         Const Cobj = new Const();
-                        throw new Exception(Cobj.InsertFailure);
+                        throw new Exception(Cobj.UpdateFailure);
                     case "1":
                         break;
                     default:

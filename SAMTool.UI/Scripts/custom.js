@@ -124,6 +124,9 @@ function notyAlert(type, msgtxt,title) {
    
 }
 
+
+ 
+
 function SelectAllValue(e) {
     $(e).select();
 }
@@ -306,9 +309,9 @@ function () {
 }
 
 
-//function Logout() {
-//    window.location = appAddress;
-//}
+function goHome() {
+    window.location = appAddress+'/Home';
+}
 
 //var loadStatus = 0;
  

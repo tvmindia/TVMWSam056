@@ -23,6 +23,8 @@ namespace SAMTool.UI.Models
     {
         public Guid ID { get; set; }
         public Guid AppID { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Sub-object name")]
         public Guid ObjectID { get; set; }
 
         [Display(Name = "Sub Object Name")]

@@ -49,9 +49,20 @@ namespace SAMTool.BusinessServices.Services
             }
         }
 
-        public List<AppSubobject> GetAllAppSubObjects()
+        public List<AppSubobject> GetAllAppSubObjects(string ID)
         {
-            return _appObjectRepository.GetAllAppSubObjects();
+            
+            List<AppSubobject> List = null;
+            try
+            {
+                List = _appObjectRepository.GetAllAppSubObjects();
+                List = List.Where(j => j.AppID == Guid.Parse(ID)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return List;
         }
 
         public AppSubobject DeleteSubObject(AppSubobject AppObjList)

@@ -12,7 +12,7 @@ namespace SAMTool.BusinessServices.Contracts
         AppObject InsertUpdate(AppObject AppObjList);
         AppObject DeleteObject(AppObject AppObjList);
 
-        List<AppSubobject> GetAllAppSubObjects();
+        List<AppSubobject> GetAllAppSubObjects(string ID);
         AppSubobject DeleteSubObject(AppSubobject AppObjList);
         AppSubobject InsertUpdateSubObject(AppSubobject AppObjList);
     }

@@ -93,11 +93,10 @@ namespace SAMTool.UI.Controllers
 
             try
             {
-                if (ModelState.IsValid)
-                {
+               
                     AppObjectViewModel r = Mapper.Map<AppObject, AppObjectViewModel>(_appObjectBusiness.DeleteObject(Mapper.Map<AppObjectViewModel, AppObject>(AppObjectObj)));
                     return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess, Records = r });
-                }
+           
 
             }
             catch (Exception ex)
@@ -165,9 +164,9 @@ namespace SAMTool.UI.Controllers
             return result;
         }
         [HttpGet]
-        public string GetAllAppSubObjects()
+        public string GetAllAppSubObjects(string ID)
         {
-            List<AppSubobjectViewmodel> ItemList = Mapper.Map<List<AppSubobject>, List<AppSubobjectViewmodel>>(_appObjectBusiness.GetAllAppSubObjects());
+            List<AppSubobjectViewmodel> ItemList = Mapper.Map<List<AppSubobject>, List<AppSubobjectViewmodel>>(_appObjectBusiness.GetAllAppSubObjects(ID));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
 
         }
@@ -211,7 +210,7 @@ namespace SAMTool.UI.Controllers
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back to list";
-                    ToolboxViewModelObj.backbtn.Event = "";
+                    ToolboxViewModelObj.backbtn.Event = "goHome()";
 
                     //ToolboxViewModelObj.savebtn.Visible = true;
                     //ToolboxViewModelObj.savebtn.Disable = true;
@@ -236,7 +235,7 @@ namespace SAMTool.UI.Controllers
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back to list";
-                    ToolboxViewModelObj.backbtn.Event = "";
+                    ToolboxViewModelObj.backbtn.Event = "goHome()";
 
                     //ToolboxViewModelObj.savebtn.Visible = true;
                     //ToolboxViewModelObj.savebtn.Disable = true;
@@ -279,7 +278,7 @@ namespace SAMTool.UI.Controllers
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back to list";
-                    ToolboxViewModelObj.backbtn.Event = "goback()";
+                    ToolboxViewModelObj.backbtn.Event = "$('#btnBack').trigger('click');";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Title = "Save Object";
