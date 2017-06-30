@@ -256,7 +256,7 @@ namespace SAMTool.RepositoryServices.Services
                                 
                                 if (sdr.Read())
                                 {
-                                    SecurityCode = (sdr["UserRight"].ToString() != "" ? sdr["UserRight"].ToString() : SecurityCode);
+                                    SecurityCode = (sdr["UserRight"].ToString() != "" ? sdr["UserRight"].ToString() : string.Empty);
                                 }
                             }
                         }
@@ -271,7 +271,7 @@ namespace SAMTool.RepositoryServices.Services
 
             return SecurityCode;
         }
-        public List<SubPermission> GetSubObjectAccess(Guid ObjectID)
+        public List<SubPermission> GetSubObjectAccess(string LoggedUser, string ObjectName, Guid AppID)
         {
             List<SubPermission> SubPermissionList = null;
             try
@@ -285,8 +285,11 @@ namespace SAMTool.RepositoryServices.Services
                             con.Open();
                         }
                         cmd.Connection = con;
-                        cmd.CommandText = "[]";
+                        cmd.CommandText = "[GetSubObjects]";
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@LoggedName", SqlDbType.NVarChar, 250).Value = LoggedUser;
+                        cmd.Parameters.Add("@AppID", SqlDbType.UniqueIdentifier).Value = AppID;
+                        cmd.Parameters.Add("@ObjectName", SqlDbType.NVarChar, 250).Value = ObjectName;
                         using (SqlDataReader sdr = cmd.ExecuteReader())
                         {
                             if ((sdr != null) && (sdr.HasRows))
@@ -296,8 +299,8 @@ namespace SAMTool.RepositoryServices.Services
                                 {
                                     SubPermission _SubPermissionObj = new SubPermission();
                                     {
-                                        _SubPermissionObj.Name = (sdr["Name"].ToString() != "" ? sdr["Name"].ToString() : _SubPermissionObj.Name);
-                                        _SubPermissionObj.AccessCode = (sdr["AccessCode"].ToString() != "" ? sdr["AccessCode"].ToString() : _SubPermissionObj.AccessCode);
+                                        _SubPermissionObj.Name = (sdr["Name"].ToString() != "" ? sdr["Name"].ToString() : string.Empty);
+                                        _SubPermissionObj.AccessCode = (sdr["AccessCode"].ToString() != "" ? sdr["AccessCode"].ToString() : string.Empty);
                                        
                                     }
                                     SubPermissionList.Add(_SubPermissionObj);

@@ -8,6 +8,7 @@ using SAMTool.DataAccessObject.DTO;
 using System.Text;
 using System.Security.Cryptography;
 using System.Configuration;
+using static System.Collections.Specialized.BitVector32;
 
 namespace SAMTool.BusinessServices.Services
 {
@@ -140,16 +141,12 @@ namespace SAMTool.BusinessServices.Services
 
         public Permission GetSecurityCode(string LoginName, string ProjectObject)
         {
-          
             Permission _permission = new Permission()
             {
                 Name = ProjectObject,
-                AccessCode= _userRepository.GetObjectAccess(LoginName, ProjectObject, AppID),
-                
+                AccessCode = _userRepository.GetObjectAccess(LoginName, ProjectObject, AppID),
+                SubPermissionList = _userRepository.GetSubObjectAccess(LoginName, ProjectObject, AppID)
             };
-           
-               
-            
             return _permission;
         }
 
