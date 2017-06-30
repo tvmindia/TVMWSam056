@@ -20,5 +20,6 @@ namespace SAMTool.UI.Models
         public List<ManageAccessViewModel> ManageAccessList { get; set; }
         public List<SelectListItem> ApplicationList { get; set; }
         public List<SelectListItem> RoleList { get; set; }
+
     }
 }

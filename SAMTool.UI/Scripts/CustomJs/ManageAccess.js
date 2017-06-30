@@ -138,7 +138,7 @@ function SaveChanges()
     ManageAccessViewModel.ManageAccessList = ManageAccessList;
     var data = "{'manageAccessViewModelObj':" + JSON.stringify(ManageAccessViewModel) + "}";
     PostDataObjectToServer('ManageAccess/AddAccessChanges/', data, function (JsonResult) {
-        debugger;
+ 
         var i = JsonResult
         switch (i.Result) {
                 case "OK":

@@ -36,7 +36,7 @@
             <div class="col-md-12" style="padding-left: 0px;border-bottom: 2px solid gainsboro;margin-top:4%">
                 <div class="form-group">
                     <div class="col-md-4">
-                        <label class="control-label">Select Application</label>
+                        <label class="control-label">Select Role</label>
                     </div>
                     <div class="col-md-6">
                         @Html.DropDownListFor(model => model.RoleID, Model.RoleList, "--Select Role--", new { @class = "form-control", @onchange = "ChangeObjectData(this)", @id = "ddlRole" })

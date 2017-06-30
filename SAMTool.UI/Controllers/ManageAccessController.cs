@@ -69,7 +69,6 @@ namespace SAMTool.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
                     manageAccessViewModelObj.commonObj = new CommonViewModel();
                     manageAccessViewModelObj.commonObj.CreatedBy = "Thomson";
                     manageAccessViewModelObj.commonObj.CreatedDate = DateTime.Now;

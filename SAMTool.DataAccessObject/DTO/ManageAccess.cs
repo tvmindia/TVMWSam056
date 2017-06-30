@@ -17,5 +17,6 @@ namespace SAMTool.DataAccessObject.DTO
         public string DetailXml { get; set; }
         public Common commonObj { get; set; }
         public AppObject AppObjectObj { get; set; }
+
     }
 }
