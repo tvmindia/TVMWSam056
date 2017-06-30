@@ -14,5 +14,8 @@ namespace SAMTool.DataAccessObject.DTO
         public bool Write { get; set; }
         public bool Delete { get; set; }
         public bool Special { get; set; }
+        public string DetailXml { get; set; }
+        public Common commonObj { get; set; }
+        public AppObject AppObjectObj { get; set; }
     }
 }
