@@ -36,5 +36,27 @@ namespace SAMTool.BusinessServices.Services
             return _appObjectRepository.DeleteObject(AppObjectObj);
         }
 
+
+        public AppSubobject InsertUpdateSubObject(AppSubobject AppObjectObj)
+        {
+            if (AppObjectObj.ID != Guid.Empty)
+            {
+                return _appObjectRepository.UpdateSubObject(AppObjectObj);
+            }
+            else
+            {
+                return _appObjectRepository.InsertSubObject(AppObjectObj);
+            }
+        }
+
+        public List<AppSubobject> GetAllAppSubObjects()
+        {
+            return _appObjectRepository.GetAllAppSubObjects();
+        }
+
+        public AppSubobject DeleteSubObject(AppSubobject AppObjList)
+        {
+            return _appObjectRepository.DeleteSubObject(AppObjList);
+        }
     }
 }
