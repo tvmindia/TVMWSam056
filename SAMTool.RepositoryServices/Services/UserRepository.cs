@@ -230,6 +230,91 @@ namespace SAMTool.RepositoryServices.Services
             }
         }
 
-       
+        public string GetObjectAccess(string LoggedUser,string ObjectName,Guid AppID)
+        {
+            string SecurityCode=null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[GetObjectAccess]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@LoggedName", SqlDbType.NVarChar, 250).Value = LoggedUser;
+                        cmd.Parameters.Add("@AppID", SqlDbType.UniqueIdentifier).Value = AppID;
+                        cmd.Parameters.Add("@ObjectName", SqlDbType.NVarChar, 250).Value = ObjectName;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                
+                                if (sdr.Read())
+                                {
+                                    SecurityCode = (sdr["UserRight"].ToString() != "" ? sdr["UserRight"].ToString() : SecurityCode);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return SecurityCode;
+        }
+        public List<SubPermission> GetSubObjectAccess(Guid ObjectID)
+        {
+            List<SubPermission> SubPermissionList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                SubPermissionList = new List<SubPermission>();
+                                while (sdr.Read())
+                                {
+                                    SubPermission _SubPermissionObj = new SubPermission();
+                                    {
+                                        _SubPermissionObj.Name = (sdr["Name"].ToString() != "" ? sdr["Name"].ToString() : _SubPermissionObj.Name);
+                                        _SubPermissionObj.AccessCode = (sdr["AccessCode"].ToString() != "" ? sdr["AccessCode"].ToString() : _SubPermissionObj.AccessCode);
+                                       
+                                    }
+                                    SubPermissionList.Add(_SubPermissionObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return SubPermissionList;
+        }
+
     }
 }

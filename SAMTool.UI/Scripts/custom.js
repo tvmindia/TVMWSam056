@@ -154,7 +154,28 @@ function PostDataToServer(page, formData, callback)
     });
     
 }
+function PostDataObjectToServer(page, formData, callback) {
+    $.ajax({
+        type: "POST",
+        url: appAddress + page,
+        async: true,
+        data: formData,
+        cache: false,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            callback(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            notyAlert('error', errorThrown + ',' + textStatus + ',' + jqXHR.statusText);
+        },
+        complete: function () {
 
+        }
+
+    });
+
+}
 
 function GetDataFromServer(page, formData) {
     var jsonResult = {};

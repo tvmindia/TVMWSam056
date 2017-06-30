@@ -21,11 +21,11 @@ namespace SAMTool.UI.Controllers
 
         public UserController(IUserBusiness userBusiness,IRolesBusiness rolesBusiness)
         {
-            _userBusiness = userBusiness;
+            _userBusiness = userBusiness; 
             _rolesBusiness = rolesBusiness;
         }
 
-        //[AuthSecurityFilter(ProjectObject = "User", AccessMode = "R")]
+       // [AuthSecurityFilter(ProjectObject = "User", Mode = "R")]
         [HttpGet]
         public  ActionResult Index()
         {
@@ -79,7 +79,7 @@ namespace SAMTool.UI.Controllers
         #endregion InsertUpdateEvent
 
         #region GetAllUsers
-        //[AuthSecurityFilter(ProjectObject = "User", AccessMode = "R")]
+        //[AuthSecurityFilter(ProjectObject = "User", Mode = "R")]
         [HttpGet]
         public string GetAllUsers()
         {

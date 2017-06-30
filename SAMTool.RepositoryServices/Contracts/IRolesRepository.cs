@@ -14,6 +14,6 @@ namespace SAMTool.RepositoryServices.Contracts
         object InsertRoles(Roles RolesObj);
         object UpdateRoles(Roles RolesObj); 
         object DeleteRoles(Roles RolesObj);
-        List<Roles> GetAllRolesHeldByUser(string LoggedUser, Guid AppID);
+       
     }
 }
