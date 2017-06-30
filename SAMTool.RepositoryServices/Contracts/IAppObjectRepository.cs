@@ -12,5 +12,10 @@ namespace SAMTool.RepositoryServices.Contracts
         AppObject InsertObject(AppObject AppObjectObj);
         AppObject UpdateObject(AppObject AppObjectObj);
         AppObject DeleteObject(AppObject AppObjList);
+
+        List<AppSubobject> GetAllAppSubObjects();
+        AppSubobject InsertSubObject(AppSubobject AppObjectObj);
+        AppSubobject UpdateSubObject(AppSubobject AppObjectObj);
+        AppSubobject DeleteSubObject(AppSubobject AppObjList);
     }
 }
