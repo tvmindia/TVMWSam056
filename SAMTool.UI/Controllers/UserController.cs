@@ -21,7 +21,7 @@ namespace SAMTool.UI.Controllers
 
         public UserController(IUserBusiness userBusiness,IRolesBusiness rolesBusiness)
         {
-            _userBusiness = userBusiness;
+            _userBusiness = userBusiness; 
             _rolesBusiness = rolesBusiness;
         }
 
