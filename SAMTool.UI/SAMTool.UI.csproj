@@ -405,6 +405,7 @@
     <Content Include="Scripts\CustomJs\AppObject.js" />
     <Content Include="Scripts\CustomJs\AppSubobject.js" />
     <Content Include="Scripts\CustomJs\ManageAccess.js" />
+    <Content Include="Scripts\CustomJs\ManageSubObjectAccess.js" />
     <Content Include="Scripts\CustomJs\Privileges.js" />
     <Content Include="Scripts\CustomJs\PrivilegesView.js" />
     <Content Include="Scripts\CustomJs\Roles.js" />
@@ -559,6 +560,7 @@
     <Content Include="Views\Privileges\PrivilegesView.cshtml" />
     <Content Include="Views\AppObject\Subobjects.cshtml" />
     <Content Include="Views\ManageAccess\Index.cshtml" />
+    <Content Include="Views\ManageAccess\SubobjectIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

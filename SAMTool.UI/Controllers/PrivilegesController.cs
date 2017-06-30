@@ -43,7 +43,7 @@ namespace SAMTool.UI.Controllers
             _privillegesObj.ApplicationList = selectListItem;
 
             selectListItem = new List<SelectListItem>();
-            List<RolesViewModel> RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllRoles());
+            List<RolesViewModel> RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(null));
             foreach (RolesViewModel Appl in RoleList)
             {
                 selectListItem.Add(new SelectListItem

@@ -31,7 +31,7 @@ namespace SAMTool.UI.Controllers
         {
 
             UserViewModel userobj = new UserViewModel();
-            userobj.RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllRoles());
+            userobj.RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(null));
             return View(userobj); 
         }
 

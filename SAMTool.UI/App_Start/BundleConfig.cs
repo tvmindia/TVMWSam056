@@ -27,6 +27,7 @@ namespace SAMTool.UI.App_Start
             bundles.Add(new ScriptBundle("~/bundles/AppSubobject").Include("~/Scripts/CustomJs/AppSubobject.js"));
             
             bundles.Add(new ScriptBundle("~/bundles/ManageAccess").Include("~/Scripts/CustomJs/ManageAccess.js"));
+            bundles.Add(new ScriptBundle("~/bundles/ManageSubObjectAccess").Include("~/Scripts/CustomJs/ManageSubObjectAccess.js"));
 
 
 

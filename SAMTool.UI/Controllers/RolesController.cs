@@ -111,7 +111,7 @@ namespace SAMTool.UI.Controllers
             try
             {
 
-                List<RolesViewModel> rolesList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllRoles());
+                List<RolesViewModel> rolesList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(null));
                 return JsonConvert.SerializeObject(new { Result = "OK", Records = rolesList });
             }
             catch (Exception ex)

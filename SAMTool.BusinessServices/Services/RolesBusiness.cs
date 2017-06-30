@@ -31,12 +31,12 @@ namespace SAMTool.BusinessServices.Services
             return result;
         }
 
-        public List<Roles> GetAllRoles()
+        public List<Roles> GetAllAppRoles(Guid? id)
         {
             List<Roles> RoleList = null;
             try
             {
-                RoleList = _rolesRepository.GetAllRoles();
+                RoleList = _rolesRepository.GetAllAppRoles(id);
             }
             catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace SAMTool.BusinessServices.Services
 
             try
             {
-                RolesList = _rolesRepository.GetAllRoles();
+                RolesList = _rolesRepository.GetAllAppRoles(null);
                 RolesList = RolesList.Where(j => j.ID == Guid.Parse(id)).ToList();
             }
             catch (Exception ex)

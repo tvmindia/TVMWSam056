@@ -18,7 +18,7 @@ $(document).ready(function () {
                { "data": "Read" },
                { "data": "Write" },
                { "data": "Delete" },
-               { "data": null, "orderable": false, "defaultContent": '<a href="#" onclick="ManageSubObject(this)">Manage Sub-object</a>' }
+               { "data": null, "orderable": false }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                  {
@@ -45,6 +45,11 @@ $(document).ready(function () {
                          }
 
                          return Checkbox
+                     }
+                 },
+                 {
+                     "targets": [6], "render": function (data, type, row) {
+                         return '<a href="/ManageAccess/SubobjectIndex/'+row.ID+'?appId=' + $('#ddlApplication').val() + '" >Manage Sub-objects</a>'
                      }
                  }
 

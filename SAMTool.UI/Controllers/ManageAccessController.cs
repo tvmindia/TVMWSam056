@@ -17,11 +17,13 @@ namespace SAMTool.UI.Controllers
         private IApplicationBusiness _applicationBusiness;
         private IManageAccessBusiness _manageAccessBusiness;
         private IRolesBusiness _rolesBusiness;
-        public ManageAccessController(IApplicationBusiness applicationBusiness, IManageAccessBusiness manageAccessBusiness,IRolesBusiness rolesBusiness)
+        private IAppObjectBusiness __appObjectBusiness;
+        public ManageAccessController(IApplicationBusiness applicationBusiness, IManageAccessBusiness manageAccessBusiness,IRolesBusiness rolesBusiness,IAppObjectBusiness appObjectBusiness)
         {
             _applicationBusiness = applicationBusiness;
             _manageAccessBusiness = manageAccessBusiness;
             _rolesBusiness = rolesBusiness;
+            __appObjectBusiness = appObjectBusiness;
         }
         // GET: ManageAccess
         public ActionResult Index()
@@ -41,7 +43,7 @@ namespace SAMTool.UI.Controllers
             }
             _manageAccessViewModelObj.ApplicationList = selectListItem;
             selectListItem = new List<SelectListItem>();
-            List<RolesViewModel> RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllRoles());
+            List<RolesViewModel> RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(null));
             foreach (RolesViewModel Appl in RoleList)
             {
                 selectListItem.Add(new SelectListItem
@@ -53,6 +55,39 @@ namespace SAMTool.UI.Controllers
             }
             _manageAccessViewModelObj.RoleList = selectListItem;
             return View(_manageAccessViewModelObj);
+        }
+        public ActionResult SubobjectIndex(string id)
+        {
+            ViewBag.objectID = id;
+            string Appid = Request.QueryString["appId"].ToString();
+            ViewBag.AppID = Appid;
+            ManageSubObjectAccessViewModel _manageSubObjectAccessViewModelObj = new ManageSubObjectAccessViewModel();
+            List<SelectListItem> selectListItem = new List<SelectListItem>();
+            selectListItem = new List<SelectListItem>();
+            List<AppObjectViewModel> List = Mapper.Map<List<AppObject>, List<AppObjectViewModel>>(__appObjectBusiness.GetAllAppObjects(Guid.Parse(Appid)));
+            foreach (AppObjectViewModel Appl in List)
+            {
+                selectListItem.Add(new SelectListItem
+                {
+                    Text = Appl.ObjectName,
+                    Value = Appl.ID.ToString(),
+                    Selected = false
+                });
+            }
+            _manageSubObjectAccessViewModelObj.ObjectList = selectListItem;
+            selectListItem = new List<SelectListItem>();
+            List<RolesViewModel> RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(Guid.Parse(Appid)));
+            foreach (RolesViewModel Appl in RoleList)
+            {
+                selectListItem.Add(new SelectListItem
+                {
+                    Text = Appl.RoleName,
+                    Value = Appl.ID.ToString(),
+                    Selected = false
+                });
+            }
+            _manageSubObjectAccessViewModelObj.RoleList = selectListItem;
+            return View(_manageSubObjectAccessViewModelObj);
         }
         [HttpGet]
         public string GetAllObjectAccess(string AppID,string RoleID)
@@ -90,6 +125,42 @@ namespace SAMTool.UI.Controllers
             }
             return result;
             }
+        [HttpGet]
+        public string GetAllSubObjectAccess(string ObjectID, string RoleID)
+        {
+            List<ManageSubObjectAccessViewModel> ItemList = Mapper.Map<List<ManageSubObjectAccess>, List<ManageSubObjectAccessViewModel>>(_manageAccessBusiness.GetAllSubObjectAccess((ObjectID != "" ? Guid.Parse(ObjectID) : Guid.Empty), (RoleID != "" ? Guid.Parse(RoleID) : Guid.Empty)));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
+
+        }
+        [HttpPost]
+        public string AddSubObjectAccessChanges(ManageSubObjectAccessViewModel manageSubObjectAccessViewModelObj)
+        {
+            string result = "";
+            try
+            {
+                //if (ModelState.IsValid)
+               // {
+                    manageSubObjectAccessViewModelObj.commonObj = new CommonViewModel();
+                    manageSubObjectAccessViewModelObj.commonObj.CreatedBy = "Thomson";
+                    manageSubObjectAccessViewModelObj.commonObj.CreatedDate = DateTime.Now;
+                    foreach (ManageSubObjectAccessViewModel ManageSubObjectAccessObj in manageSubObjectAccessViewModelObj.ManageSubObjectAccessList)
+                    {
+                        ManageSubObjectAccessObj.commonObj = new CommonViewModel();
+                        ManageSubObjectAccessObj.commonObj = manageSubObjectAccessViewModelObj.commonObj;
+                    }
+                    ManageSubObjectAccessViewModel r = Mapper.Map<ManageSubObjectAccess, ManageSubObjectAccessViewModel>(_manageAccessBusiness.AddSubObjectAccessChanges(Mapper.Map<List<ManageSubObjectAccessViewModel>, List<ManageSubObjectAccess>>(manageSubObjectAccessViewModelObj.ManageSubObjectAccessList)));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Message = c.InsertSuccess, Records = r });
+                //}
+
+            }
+            catch (Exception ex)
+            {
+
+                ConstMessage cm = c.GetMessage(ex.Message);
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
+            }
+            return result;
+        }
         #region ButtonStyling
         [HttpGet]
         public ActionResult ChangeButtonStyle(string ActionType)
