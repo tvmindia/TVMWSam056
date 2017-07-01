@@ -116,6 +116,7 @@ namespace SAMTool.UI.SecurityFilter
             if (_permission.AccessCode.Contains(Mode))
             {
                 //Allows Permission
+                filterContext.HttpContext.Session.Add("UserRights", _permission);
             }
             else
             {

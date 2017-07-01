@@ -68,6 +68,60 @@ namespace SAMTool.RepositoryServices.Services
             }
             return manageAccessList;
         }
+        public List<ManageSubObjectAccess> GetAllSubObjectAccess(Guid ObjectID, Guid RoleID)
+        {
+            List<ManageSubObjectAccess> manageSubObjectAccessList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@ObjectID", SqlDbType.UniqueIdentifier).Value = ObjectID;
+                        cmd.Parameters.Add("@RoleID", SqlDbType.UniqueIdentifier).Value = RoleID;
+                        cmd.CommandText = "[GetAllSubObjectAccess]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                manageSubObjectAccessList = new List<ManageSubObjectAccess>();
+                                while (sdr.Read())
+                                {
+                                    ManageSubObjectAccess _manageSubObjectAccesslistObj = new ManageSubObjectAccess();
+                                    {
+                                        _manageSubObjectAccesslistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _manageSubObjectAccesslistObj.ID);
+                                        _manageSubObjectAccesslistObj.SubObjectID = (sdr["SubObjectID"].ToString() != "" ? Guid.Parse(sdr["SubObjectID"].ToString()) : _manageSubObjectAccesslistObj.SubObjectID);
+                                        _manageSubObjectAccesslistObj.AppSubObjectObj = new AppSubobject();
+                                        _manageSubObjectAccesslistObj.AppSubObjectObj.ObjectID = (sdr["ObjectID"].ToString() != "" ? Guid.Parse(sdr["ObjectID"].ToString()) : _manageSubObjectAccesslistObj.AppSubObjectObj.ObjectID);
+                                        _manageSubObjectAccesslistObj.AppSubObjectObj.SubObjName = (sdr["SubObjName"].ToString() != "" ? (sdr["SubObjName"].ToString()) : _manageSubObjectAccesslistObj.AppSubObjectObj.SubObjName);
+                                        _manageSubObjectAccesslistObj.AppObjectObj = new AppObject();
+                                        _manageSubObjectAccesslistObj.AppObjectObj.AppID = (sdr["AppID"].ToString() != "" ? Guid.Parse(sdr["AppID"].ToString()) : _manageSubObjectAccesslistObj.AppObjectObj.AppID);
+                                        _manageSubObjectAccesslistObj.AppObjectObj.ObjectName = (sdr["ObjectName"].ToString() != "" ? (sdr["ObjectName"].ToString()) : _manageSubObjectAccesslistObj.AppObjectObj.ObjectName);
+                                        _manageSubObjectAccesslistObj.AppObjectObj.AppName = (sdr["AppName"].ToString() != "" ? (sdr["AppName"].ToString()) : _manageSubObjectAccesslistObj.AppObjectObj.AppName);
+                                        _manageSubObjectAccesslistObj.RoleID = (sdr["RoleID"].ToString() != "" ? Guid.Parse(sdr["RoleID"].ToString()) : _manageSubObjectAccesslistObj.RoleID);
+                                        _manageSubObjectAccesslistObj.Read = (sdr["R"].ToString() != "" ? bool.Parse(sdr["R"].ToString()) : _manageSubObjectAccesslistObj.Read);
+                                        _manageSubObjectAccesslistObj.Write = (sdr["W"].ToString() != "" ? bool.Parse(sdr["W"].ToString()) : _manageSubObjectAccesslistObj.Write);
+                                    }
+
+                                    manageSubObjectAccessList.Add(_manageSubObjectAccesslistObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return manageSubObjectAccessList;
+        }
         public ManageAccess AddAccessChanges(List<ManageAccess> ManageAccessList)
         {
             ManageAccess ManageAccessObj = new ManageAccess();
@@ -121,6 +175,60 @@ namespace SAMTool.RepositoryServices.Services
                 throw ex;
             }
            return ManageAccessObj;
+        }
+        public ManageSubObjectAccess AddSubObjectAccessChanges(List<ManageSubObjectAccess> ManageSubObjectAccessList)
+        {
+            ManageSubObjectAccess ManageAccessObj = new ManageSubObjectAccess();
+            ManageAccessObj = ManageSubObjectAccessList[0];
+            try
+            {
+
+                SqlParameter outputStatus, outputID = null;
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[AddSubObjectAccess]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@ObjectID", SqlDbType.UniqueIdentifier).Value = ManageAccessObj.AppSubObjectObj.ObjectID;
+                        cmd.Parameters.Add("@RoleID", SqlDbType.UniqueIdentifier).Value = ManageAccessObj.RoleID;
+                        cmd.Parameters.Add("@DetailXml", SqlDbType.NVarChar, -1).Value = ManageAccessObj.DetailXml;
+                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = ManageAccessObj.commonObj.CreatedBy;
+                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = ManageAccessObj.commonObj.CreatedDate;
+                        outputStatus = cmd.Parameters.Add("@Status", SqlDbType.SmallInt);
+                        outputStatus.Direction = ParameterDirection.Output;
+                        outputID = cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
+                        outputID.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+
+
+                    }
+                }
+
+                switch (outputStatus.Value.ToString())
+                {
+                    case "0":
+                        Const Cobj = new Const();
+                        throw new Exception(Cobj.InsertFailure);
+                    case "1":
+                        //AppObjectObj.ID = new Guid(outputID.Value.ToString());
+
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ManageAccessObj;
         }
     }
 }

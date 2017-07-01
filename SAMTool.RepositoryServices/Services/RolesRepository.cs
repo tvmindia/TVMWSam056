@@ -62,7 +62,7 @@ namespace SAMTool.RepositoryServices.Services
             }
         }
 
-        public List<Roles> GetAllRoles()
+        public List<Roles> GetAllAppRoles(Guid? id)
         { 
             List<Roles> rolesList = null;
             try
@@ -77,6 +77,8 @@ namespace SAMTool.RepositoryServices.Services
                         }
                         cmd.Connection = con;
                         cmd.CommandText = "[GetRoles]";
+                        if(id!=null)
+                        cmd.Parameters.Add("@AppID", SqlDbType.UniqueIdentifier).Value = id;
                         cmd.CommandType = CommandType.StoredProcedure;
                         using (SqlDataReader sdr = cmd.ExecuteReader())
                         {
