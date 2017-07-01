@@ -65,11 +65,20 @@ $(document).ready(function () {
             TableBind(ManageAccessViewModel);
             ChangeButtonPatchView("ManageAccess", "sectionManageAccessbtnPatch", "Default");
         });
+        
     }
     catch (e) {
         notyAlert('error', e.message);
+    }
+    try
+    {
+        $('select#ddlRole').trigger('change');
+    }
+    catch(e)
+    {
 
     }
+    
 });
 function GetAllAppRoles() {
     try {

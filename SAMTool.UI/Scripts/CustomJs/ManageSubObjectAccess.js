@@ -65,7 +65,7 @@ $(document).ready(function () {
 
 function GobackMangeAccess() {
     debugger;
-    window.location = $('#backlink>a').attr('href');
+    window.location = $('#backlink>a').attr('href') + "?Appid=" + $('#backlink>a').attr('name');
 }
 function TableBind(ManageSubObjectAccessViewModel) {
     DataTables.ObjectTable.clear().rows.add(GetAllAppObjects(ManageSubObjectAccessViewModel)).draw(false);

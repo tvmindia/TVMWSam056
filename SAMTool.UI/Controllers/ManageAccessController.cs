@@ -31,6 +31,7 @@ namespace SAMTool.UI.Controllers
             ManageAccessViewModel _manageAccessViewModelObj = new ManageAccessViewModel();
             List<SelectListItem> selectListItem = new List<SelectListItem>();
             selectListItem = new List<SelectListItem>();
+            string Appid = Request.QueryString["Appid"]!=null? Request.QueryString["Appid"].ToString():"";                      
             List<ApplicationViewModel> ApplicationList = Mapper.Map<List<Application>, List<ApplicationViewModel>>(_applicationBusiness.GetAllApplication());
             foreach (ApplicationViewModel Appl in ApplicationList)
             {
@@ -43,17 +44,38 @@ namespace SAMTool.UI.Controllers
             }
             _manageAccessViewModelObj.ApplicationList = selectListItem;
             selectListItem = new List<SelectListItem>();
-            List<RolesViewModel> RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(Guid.Empty));
-            foreach (RolesViewModel Appl in RoleList)
+            List<RolesViewModel> RoleList = null;
+            if (Appid != "" && Appid != null)
             {
-                selectListItem.Add(new SelectListItem
+                _manageAccessViewModelObj.AppObjectObj = new AppObjectViewModel();
+                _manageAccessViewModelObj.AppObjectObj.AppID = Guid.Parse(Appid);
+                RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(Guid.Parse(Appid)));
+                foreach (RolesViewModel Appl in RoleList)
                 {
-                    Text = Appl.RoleName,
-                    Value = Appl.ID.ToString(),
-                    Selected = false
-                });
+                    selectListItem.Add(new SelectListItem
+                    {
+                        Text = Appl.RoleName,
+                        Value = Appl.ID.ToString(),
+                        Selected = false
+                    });
+                }
+                _manageAccessViewModelObj.RoleList = selectListItem;
+                _manageAccessViewModelObj.RoleID = Guid.Parse(RoleList[0].ID.ToString());
             }
-            _manageAccessViewModelObj.RoleList = selectListItem;
+           else
+            {
+                RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(Guid.Empty));
+                foreach (RolesViewModel Appl in RoleList)
+                {
+                    selectListItem.Add(new SelectListItem
+                    {
+                        Text = Appl.RoleName,
+                        Value = Appl.ID.ToString(),
+                        Selected = false
+                    });
+                }
+                _manageAccessViewModelObj.RoleList = selectListItem;
+            }
             return View(_manageAccessViewModelObj);
         }
         public ActionResult SubobjectIndex(string id)
@@ -229,7 +251,7 @@ namespace SAMTool.UI.Controllers
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back Menu";
-                    ToolboxViewModelObj.backbtn.Event = "$('#aLinkBack').trigger('click');";
+                    ToolboxViewModelObj.backbtn.Event = "GobackMangeAccess()";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Title = "Update";
