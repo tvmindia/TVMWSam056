@@ -229,28 +229,24 @@ namespace SAMTool.UI.Controllers
 
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
-                    ToolboxViewModelObj.backbtn.Title = "Back to Menu";
+                    ToolboxViewModelObj.backbtn.Title = "Back";
                     ToolboxViewModelObj.backbtn.Event = "GobackMangeAccess()";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Disable = true;
-                    ToolboxViewModelObj.savebtn.Title = "Save Object";
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.DisableReason = "Application not selected";
-                    ToolboxViewModelObj.savebtn.Event = "";
+                    ToolboxViewModelObj.savebtn.DisableReason = "No changes yet";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
                     ToolboxViewModelObj.resetbtn.Disable = true;
-                    ToolboxViewModelObj.resetbtn.Title = "Reset Object";
                     ToolboxViewModelObj.resetbtn.Text = "Reset";
-                    ToolboxViewModelObj.resetbtn.DisableReason = "Application not selected";
-                    ToolboxViewModelObj.resetbtn.Event = "";
+                    ToolboxViewModelObj.resetbtn.DisableReason = "No changes yet";
                     break;
                 case "Checked":
 
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
-                    ToolboxViewModelObj.backbtn.Title = "Back Menu";
+                    ToolboxViewModelObj.backbtn.Title = "Back";
                     ToolboxViewModelObj.backbtn.Event = "GobackMangeAccess()";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
