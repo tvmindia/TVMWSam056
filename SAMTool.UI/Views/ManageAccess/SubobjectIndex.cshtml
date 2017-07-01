@@ -29,7 +29,7 @@
                         <label class="control-label">Select Object</label>
                     </div>
                     <div class="col-md-6">
-                        @Html.DropDownListFor(model => model.AppObjectObj.AppID, Model.ObjectList, "--Select Object--", new { @class = "form-control", @onchange = "ChangeObjectData(this)", @id = "ddlObject" })
+                        @Html.DropDownListFor(model => model.AppObjectObj.ID, Model.ObjectList, "--Select Object--", new { @class = "form-control", @id = "ddlObject" })
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                         <label class="control-label">Select Role</label>
                     </div>
                     <div class="col-md-6">
-                        @Html.DropDownListFor(model => model.RoleID, Model.RoleList, "--Select Role--", new { @class = "form-control", @onchange = "ChangeObjectData(this)", @id = "ddlRole" })
+                        @Html.DropDownListFor(model => model.RoleID, Model.RoleList, "--Select Role--", new { @class = "form-control", @id = "ddlRole" })
                     </div>
                 </div>
             </div>
@@ -63,7 +63,9 @@
         </table>
     </div>
 
-
+    <div id="backlink" style="display:none;">
+        @Html.ActionLink("Back to List", "Index","ManageAccess")
+    </div>
 </div>
 
 
@@ -78,6 +80,4 @@
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/ManageSubObjectAccess")
 }
 
-<div style="display:none">
-    @Html.ActionLink("Back to List", "Index")
-</div>
+

@@ -49,7 +49,7 @@ $(document).ready(function () {
                  },
                  {
                      "targets": [6], "render": function (data, type, row) {
-                         return '<a href="/ManageAccess/SubobjectIndex/'+row.ID+'?appId=' + $('#ddlApplication').val() + '" >Manage Sub-objects</a>'
+                         return '<a href="/ManageAccess/SubobjectIndex/'+row.ObjectID+'?appId=' + $('#ddlApplication').val() + '" >Manage Sub-objects</a>'
                      }
                  }
 
@@ -71,6 +71,46 @@ $(document).ready(function () {
 
     }
 });
+function GetAllAppRoles() {
+    try {
+        debugger;
+        var data = { "AppID": $('#ddlApplication').val() };
+        var ds = {};
+        ds = GetDataFromServer("ManageAccess/GetAllAppRoles/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            //return ds.Records;
+            debugger;
+            $("select#ddlRole").empty();
+            $("select#ddlRole").append($("<option>")
+             .val('')
+             .html("---Select Role---")
+             );
+            for (var i = 0; i < ds.Records.length; i++)
+            {
+                debugger;
+             $("select#ddlRole").append($("<option>")
+            .val(ds.Records[i].Value)
+            .html(ds.Records[i].Text)
+            );
+            }
+            
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+function GobackMangeAccess()
+{
+    debugger;
+    window.location = $('#aLinkBack').attr('href');
+}
 function TableBind(ManageAccessViewModel)
 {
     DataTables.ObjectTable.clear().rows.add(GetAllAppObjects(ManageAccessViewModel)).draw(false);

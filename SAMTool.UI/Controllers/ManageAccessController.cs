@@ -43,7 +43,7 @@ namespace SAMTool.UI.Controllers
             }
             _manageAccessViewModelObj.ApplicationList = selectListItem;
             selectListItem = new List<SelectListItem>();
-            List<RolesViewModel> RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(null));
+            List<RolesViewModel> RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(Guid.Empty));
             foreach (RolesViewModel Appl in RoleList)
             {
                 selectListItem.Add(new SelectListItem
@@ -102,7 +102,26 @@ namespace SAMTool.UI.Controllers
                 });
             }
             _manageSubObjectAccessViewModelObj.RoleList = selectListItem;
+            _manageSubObjectAccessViewModelObj.AppObjectObj = new AppObjectViewModel();
+            _manageSubObjectAccessViewModelObj.AppObjectObj.ID= Guid.Parse(ViewBag.objectID != null? ViewBag.objectID : Guid.Empty);
             return View(_manageSubObjectAccessViewModelObj);
+        }
+        [HttpGet]
+        public string GetAllAppRoles(string AppID)
+        {
+            List<SelectListItem> selectListItem = new List<SelectListItem>();
+            selectListItem = new List<SelectListItem>();
+            List<RolesViewModel> RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(Guid.Parse(AppID)));
+            foreach (RolesViewModel Appl in RoleList)
+            {
+                selectListItem.Add(new SelectListItem
+                {
+                    Text = Appl.RoleName,
+                    Value = Appl.ID.ToString(),
+                    Selected = false
+                });
+            }
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = selectListItem });
         }
         [HttpGet]
         public string GetAllObjectAccess(string AppID,string RoleID)
@@ -189,7 +208,7 @@ namespace SAMTool.UI.Controllers
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back to Menu";
-                    ToolboxViewModelObj.backbtn.Event = "";
+                    ToolboxViewModelObj.backbtn.Event = "GobackMangeAccess()";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Disable = true;
@@ -210,7 +229,7 @@ namespace SAMTool.UI.Controllers
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back Menu";
-                    ToolboxViewModelObj.backbtn.Event = "";
+                    ToolboxViewModelObj.backbtn.Event = "$('#aLinkBack').trigger('click');";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Title = "Update";

@@ -62,6 +62,11 @@ $(document).ready(function () {
 
     }
 });
+
+function GobackMangeAccess() {
+    debugger;
+    window.location = $('#backlink>a').attr('href');
+}
 function TableBind(ManageSubObjectAccessViewModel) {
     DataTables.ObjectTable.clear().rows.add(GetAllAppObjects(ManageSubObjectAccessViewModel)).draw(false);
 }

@@ -28,7 +28,7 @@
                         <label class="control-label">Select Application</label>
                     </div>
                     <div class="col-md-6">
-                        @Html.DropDownListFor(model => model.AppObjectObj.AppID, Model.ApplicationList, "--Select Application--", new { @class = "form-control", @onchange = "ChangeObjectData(this)", @id = "ddlApplication" })
+                        @Html.DropDownListFor(model => model.AppObjectObj.AppID, Model.ApplicationList, "--Select Application--", new { @class = "form-control", @id = "ddlApplication",@onchange= "GetAllAppRoles()" })
                     </div>
                     @*<div class="col-md-1 mandatory"></div>*@
                 </div>
@@ -39,7 +39,7 @@
                         <label class="control-label">Select Role</label>
                     </div>
                     <div class="col-md-6">
-                        @Html.DropDownListFor(model => model.RoleID, Model.RoleList, "--Select Role--", new { @class = "form-control", @onchange = "ChangeObjectData(this)", @id = "ddlRole" })
+                        @Html.DropDownListFor(model => model.RoleID, Model.RoleList, "--Select Role--", new { @class = "form-control", @id = "ddlRole" })
                     </div>
                     @*<div class="col-md-1 mandatory"></div>*@
                 </div>
@@ -65,13 +65,16 @@
         </table>
     </div>
 
-
+    <div id="backlink" style="display:none;">
+        @Html.ActionLink("Back to List", "Index", "Home", null, new { id = "aLinkBack" })
+    </div>
 </div>
 
 
 
 <div>
 </div>
+
 
 @section Scripts {
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatable")
