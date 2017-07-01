@@ -4,7 +4,6 @@ var rowData;
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
-      
         //var UserViewModel = new Object();
         DataTables.ObjectTable = $('#tblAppObjects').DataTable(
          {
@@ -22,8 +21,8 @@ $(document).ready(function () {
              , { "data": null, "orderable": false}
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, {
-                 "targets": [5], "render": function (data, type, row) { 
-                     return '<a href="/AppObject/Subobjects/' + row.ID + '?appId=' + $('#hdnAppID').val()+'" >Manage Sub-objects</a>'
+                 "targets": [5], "render": function (data, type, row) {
+                     return '<a href="/AppObject/Subobjects/' + row.ID + '?appId=' + row.AppID + '" >Manage Sub-objects</a>'
                  } 
              }
              ]
@@ -33,7 +32,7 @@ $(document).ready(function () {
         debugger;
         if ($('#ddlApplication').val() != "")
         {
-            DataTables.ObjectTable.clear().rows.add(GetAllAppObjects($('#ddlApplication').val())).draw(false);
+            DataTables.ObjectTable.clear().rows.add(GetAllAppObjects($('#ddlApplication').val())).draw(false); 
         }
     }
     catch (e) {
@@ -124,7 +123,7 @@ function SaveSuccess(data, status, xhr)
         case "OK":
             notyAlert('success', i.Message);
             $('#hdnID').val(i.Records.ID);
-            DataTables.ObjectTable.clear().rows.add(GetAllAppObjects( $('#hdnAppID').val())).draw(false);
+            DataTables.ObjectTable.clear().rows.add(GetAllAppObjects($('#ddlApplication').val())).draw(false);
             break;
         case "Error":
             notyAlert('error', i.Message);
@@ -150,7 +149,7 @@ function DeleteSuccess(data, status, xhr) {
     switch (i.Result) {
         case "OK":
             notyAlert('success', i.Message);            
-            DataTables.ObjectTable.clear().rows.add(GetAllAppObjects($('#hdnAppID').val())).draw(false);
+            DataTables.ObjectTable.clear().rows.add(GetAllAppObjects($('#ddlApplication').val())).draw(false);
             $('#ObjectName').val('');
             $('#hdnID').val(EmptyGuid);
             break;

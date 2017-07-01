@@ -48,10 +48,10 @@ namespace SAMTool.UI.Controllers
         }
 
         public ActionResult Subobjects(string id)
-        {
+        { 
             ViewBag.objectID = id;
-            string Appid = Request.QueryString["appId"].ToString();
-            ViewBag.AppID = Appid;
+                string Appid = Request.QueryString["appId"].ToString();
+                ViewBag.AppID = Appid; 
 
             AppSubobjectViewmodel _appObjectViewModelObj = new AppSubobjectViewmodel();
             List<SelectListItem> selectListItem = new List<SelectListItem>();
@@ -95,23 +95,16 @@ namespace SAMTool.UI.Controllers
         [HttpPost]
         public string DeleteObject(AppObjectViewModel AppObjectObj)
         {
-            string result = "";
-
             try
             {
-               
                     AppObjectViewModel r = Mapper.Map<AppObject, AppObjectViewModel>(_appObjectBusiness.DeleteObject(Mapper.Map<AppObjectViewModel, AppObject>(AppObjectObj)));
                     return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess, Records = r });
-           
-
             }
             catch (Exception ex)
             {
-
                 ConstMessage cm = c.GetMessage(ex.Message);
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
             }
-            return result;
         }
         [HttpPost]
         public string InserUpdateObject(AppObjectViewModel AppObjectObj)
@@ -179,22 +172,16 @@ namespace SAMTool.UI.Controllers
         [HttpPost]
         public string DeleteSubObject(AppSubobjectViewmodel AppObjectObj)
         {
-            string result = "";
-
             try
             {
-               
                     AppSubobjectViewmodel r = Mapper.Map<AppSubobject, AppSubobjectViewmodel>(_appObjectBusiness.DeleteSubObject(Mapper.Map<AppSubobjectViewmodel, AppSubobject>(AppObjectObj)));
                     return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess, Records = r });
-             
             }
             catch (Exception ex)
             {
-
                 ConstMessage cm = c.GetMessage(ex.Message);
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
             }
-            return result;
         }
 
 
