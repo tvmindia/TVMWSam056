@@ -14,6 +14,7 @@ namespace SAMTool.UI.Controllers
 {
     public class AccountController : Controller
     {
+        Const _const = new Const();
         IUserBusiness _userBusiness;
         public AccountController(IUserBusiness userBusiness)
         {
@@ -39,11 +40,18 @@ namespace SAMTool.UI.Controllers
                 if (!ModelState.IsValid)
                 {
                     loginvm.IsFailure = true;
+                    loginvm.Message = _const.LoginFailed;
                     return View("Index", loginvm);
                 }
                 uservm = Mapper.Map<User, UserViewModel>(_userBusiness.CheckUserCredentials(Mapper.Map<LoginViewModel, User>(loginvm)));
                     if (uservm != null)
                     {
+                        if(uservm.RoleList == null || uservm.RoleList.Count==0 && string.IsNullOrEmpty(uservm.RoleIDCSV))
+                        {
+                        loginvm.IsFailure = true;
+                        loginvm.Message = _const.LoginFailedNoRoles;
+                        return View("Index", loginvm);
+                        } 
                         FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, uservm.UserName, DateTime.Now, DateTime.Now.AddHours(24), true, uservm.LoginName);
                         string encryptedTicket = FormsAuthentication.Encrypt(ticket);
                         Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
@@ -56,6 +64,7 @@ namespace SAMTool.UI.Controllers
                     else
                     {
                         loginvm.IsFailure = true;
+                        loginvm.Message = _const.LoginFailed;
                         return View("Index", loginvm);
                     }
               

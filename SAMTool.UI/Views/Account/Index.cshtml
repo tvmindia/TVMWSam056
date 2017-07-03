@@ -41,12 +41,13 @@
             <a href="#" class="forgot-password">
                 Forgot the password?
             </a>
+            <br/>
             @{
                 if (Model != null)
                 {
                     if (Model.IsFailure)
                     {
-                        <span class="text-danger logfailed">Login Failed</span>
+                        <span class="text-danger logfailed">@Model.Message</span>
                     }
                 }
             }

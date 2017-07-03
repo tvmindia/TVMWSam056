@@ -63,12 +63,21 @@ namespace SAMTool.DataAccessObject.DTO
             ConstMessage.Add(new ConstMessage("Book No already exists!", "BKN01", "ERROR"));
             ConstMessage.Add(new ConstMessage("Deletion Not Successfull!-Already In Use", "DNS01", "ERROR"));
             ConstMessage.Add(new ConstMessage("Items from this Bill already used, Cannot be deleted", "ITBD01", "ERROR"));
+            
             //
         }
 
         public string LoginAndEmailExist
         {
             get { return "Login or Email Exist! "; }
+        }
+        public string LoginFailed
+        {
+            get { return "Login Failed! "; }
+        }
+        public string LoginFailedNoRoles
+        {
+            get { return "Login Failed! You are not authorized to access this app"; }
         }
         public string InsertFailure
         {
