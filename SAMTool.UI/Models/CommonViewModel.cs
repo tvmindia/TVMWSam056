@@ -12,5 +12,6 @@ namespace SAMTool.UI.Models
         public string CreatedDatestr { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
+        public string UpdatedDatestr { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace SAMTool.DataAccessObject.DTO
     {
         public string UserName { get; set; }
         public DateTime DateTime { get; set; }
+        public Guid AppID { get; set; }
     }
 
     public class Common
