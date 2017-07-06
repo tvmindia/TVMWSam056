@@ -56,7 +56,7 @@ namespace SAMTool.BusinessServices.Services
             try
             {
                 List = _appObjectRepository.GetAllAppSubObjects();
-                List = List.Where(j => j.AppID == Guid.Parse(ID)).ToList();
+                List = List!=null?List.Where(j => j.AppID == Guid.Parse(ID)).ToList():null;
             }
             catch (Exception ex)
             {

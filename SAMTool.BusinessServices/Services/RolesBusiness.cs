@@ -52,7 +52,7 @@ namespace SAMTool.BusinessServices.Services
             try
             {
                 RolesList = _rolesRepository.GetAllAppRoles(null);
-                RolesList = RolesList.Where(j => j.ID == Guid.Parse(id)).ToList();
+                RolesList = RolesList!=null?RolesList.Where(j => j.ID == Guid.Parse(id)).ToList():null;
             }
             catch (Exception ex)
             {

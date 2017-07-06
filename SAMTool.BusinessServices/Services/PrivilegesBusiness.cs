@@ -52,7 +52,7 @@ namespace SAMTool.BusinessServices.Services
             try
             {
                 List = _privillegesRepository.GetAllPrivileges();
-                List = List.Where(j => j.ID == Guid.Parse(id)).ToList();
+                List = List!=null?List.Where(j => j.ID == Guid.Parse(id)).ToList():null;
             }
             catch (Exception ex)
             {

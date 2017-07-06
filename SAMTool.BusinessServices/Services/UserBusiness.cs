@@ -46,7 +46,7 @@ namespace SAMTool.BusinessServices.Services
             try
             {
                 UserList = _userRepository.GetAllUsers();
-                UserList = UserList.Where(j => j.ID==Guid.Parse(id)).ToList();
+                UserList = UserList!=null?UserList.Where(j => j.ID==Guid.Parse(id)).ToList():null;
             }
             catch (Exception ex)
             {
