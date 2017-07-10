@@ -9,6 +9,6 @@ namespace SAMTool.BusinessServices.Contracts
 {
     public interface IHomeBusiness
     {
-        List<Home> GetAllSysLinks();
+        List<SysMenu> GetAllSysLinks();
     }
 }

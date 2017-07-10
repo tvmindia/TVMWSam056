@@ -1,5 +1,11 @@
-﻿@using SAMTool.UI.Models;
-@model IEnumerable<HomeViewModel>
+﻿
+@model SAMTool.UI.Models.HomeViewModel
+@{
+    //List<SAMTool.UI.Models.SysMenuViewModel> sysLHSmenuList = Model._LHSSysMenuViewModel;
+    //List<SAMTool.UI.Models.SysMenuViewModel> sysRHSmenuList = Model._RHSSysMenuViewModel;
+
+}
+@*@model IEnumerable<SysMenuViewModel>*@
 @using SAMTool.UI.App_Start
 @{
     ViewBag.Title = "Index";
@@ -39,10 +45,9 @@ list-group-item.active small {
                         @{
                             if (Model != null)
                             {
-                                foreach (HomeViewModel svm in Model)
+                                foreach (SAMTool.UI.Models.SysMenuViewModel svm in Model._LHSSysMenuViewModel)
                                 {
-                                    if (svm.Type == "LHS")
-                                    {
+                                    
                                         <div class="list-group-item">
 
                                             <div class="col-md-10">
@@ -54,8 +59,7 @@ list-group-item.active small {
                                                 </p>
                                             </div>
                                         </div>
-                                    }
-
+                                  
                                 }
 
                             }
@@ -70,10 +74,9 @@ list-group-item.active small {
                         @{
                             if (Model != null)
                             {
-                                foreach (HomeViewModel svm in Model)
+                                foreach (SAMTool.UI.Models.SysMenuViewModel svm in Model._RHSSysMenuViewModel)
                                 {
-                                    if (svm.Type == "RHS")
-                                    {
+                                    
                                         <div class="list-group-item">
 
                                             <div class="col-md-10">
@@ -85,7 +88,7 @@ list-group-item.active small {
                                                 </p>
                                             </div>
                                         </div>
-                                    }
+                                   
 
                                 }
 

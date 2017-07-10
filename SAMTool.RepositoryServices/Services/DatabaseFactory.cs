@@ -20,7 +20,7 @@ namespace SAMTool.RepositoryServices.Services
         {
             try
             {
-                SQLCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SAMConnection"].ConnectionString);
+                SQLCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SPAppsConnection"].ConnectionString);
                 //if (SQLCon.State == ConnectionState.Closed)
                 //{
 

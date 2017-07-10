@@ -8,6 +8,6 @@ namespace SAMTool.RepositoryServices.Contracts
 {
     public interface IHomeRepository
     {
-        List<Home> GetAllSysLinks();
+        List<SysMenu> GetAllSysLinks();
     }
 }

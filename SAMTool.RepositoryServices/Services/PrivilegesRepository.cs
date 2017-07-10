@@ -94,7 +94,8 @@ namespace SAMTool.RepositoryServices.Services
                                         _PrivilObj.RoleName = (sdr["RoleName"].ToString() != "" ? sdr["RoleName"].ToString() : _PrivilObj.RoleName);
                                         _PrivilObj.AccessDescription = (sdr["AccessDescription"].ToString() != "" ? sdr["AccessDescription"].ToString() : _PrivilObj.AccessDescription);
                                         _PrivilObj.ModuleName = (sdr["ModuleName"].ToString() != "" ? sdr["ModuleName"].ToString() : _PrivilObj.ModuleName);
-                                        //_PrivilObj.commonDetails.CreatedDate = (sdr["CreatedDate"].ToString() != "" ? DateTime.Parse(sdr["CreatedDate"].ToString()) : _PrivilObj.commonDetails.CreatedDate);
+                                        _PrivilObj.commonDetails = new Common();
+                                        _PrivilObj.commonDetails.CreatedDate = (sdr["CreatedDate"].ToString() != "" ? DateTime.Parse(sdr["CreatedDate"].ToString()) : _PrivilObj.commonDetails.CreatedDate);
                                       
                                     }
                                     PrivilegesList.Add(_PrivilObj);
@@ -134,8 +135,8 @@ namespace SAMTool.RepositoryServices.Services
                         cmd.Parameters.Add("@RoleID", SqlDbType.UniqueIdentifier).Value = PrivilegesObj.RoleID;
                         cmd.Parameters.Add("@ModuleName", SqlDbType.NVarChar, 250).Value = PrivilegesObj.ModuleName; 
                         cmd.Parameters.Add("@AccessDescription", SqlDbType.NVarChar, -1).Value = PrivilegesObj.AccessDescription;
-                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = "Gibin"; //userObj.logDetails.CreatedBy;
-                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Now;//userObj.logDetails.CreatedDate;
+                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = PrivilegesObj.commonDetails.CreatedBy;
+                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = PrivilegesObj.commonDetails.CreatedDate;
 
                         outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
@@ -190,8 +191,8 @@ namespace SAMTool.RepositoryServices.Services
                         cmd.Parameters.Add("@RoleID", SqlDbType.UniqueIdentifier).Value = PrivilegesObj.RoleID;
                         cmd.Parameters.Add("@ModuleName", SqlDbType.NVarChar, 250).Value = PrivilegesObj.ModuleName;
                         cmd.Parameters.Add("@AccessDescription", SqlDbType.NVarChar, -1).Value = PrivilegesObj.AccessDescription;
-                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = "Gibin"; //userObj.logDetails.CreatedBy;
-                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now;//userObj.logDetails.CreatedDate;
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = PrivilegesObj.commonDetails.CreatedBy;
+                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = PrivilegesObj.commonDetails.CreatedDate;
 
                         outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;

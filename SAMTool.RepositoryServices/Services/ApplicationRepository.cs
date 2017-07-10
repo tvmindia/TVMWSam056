@@ -127,8 +127,8 @@ namespace SAMTool.RepositoryServices.Services
                         cmd.CommandText = "[InsertApplication]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 250).Value = appObj.Name; 
-                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = "Gibin"; //userObj.logDetails.CreatedBy;
-                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Now;//userObj.logDetails.CreatedDate; 
+                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = appObj.commonDetails.CreatedBy;
+                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = appObj.commonDetails.CreatedDate; 
                         outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
                         outParameter2 = cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
@@ -185,8 +185,8 @@ namespace SAMTool.RepositoryServices.Services
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = appObj.ID;
                         cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 250).Value = appObj.Name; 
-                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = "Gibin"; //userObj.logDetails.CreatedBy;
-                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now;//userObj.logDetails.CreatedDate;
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = appObj.commonDetails.CreatedBy;
+                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = appObj.commonDetails.CreatedDate;
 
                         outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;

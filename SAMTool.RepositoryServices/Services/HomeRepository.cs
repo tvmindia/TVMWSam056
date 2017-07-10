@@ -16,9 +16,9 @@ namespace SAMTool.RepositoryServices.Services
         {
             _databaseFactory = databaseFactory;
         }
-        public List<Home> GetAllSysLinks()
+        public List<SysMenu> GetAllSysLinks()
         {
-            List<Home> Linklist = null;
+            List<SysMenu> Linklist = null;
             try
             {
                 using (SqlConnection con = _databaseFactory.GetDBConnection())
@@ -36,20 +36,20 @@ namespace SAMTool.RepositoryServices.Services
                         {
                             if ((sdr != null) && (sdr.HasRows))
                             {
-                                Linklist = new List<Home>();
+                                Linklist = new List<SysMenu>();
                                 while (sdr.Read())
                                 {
-                                    Home _HomeObj = new Home();
+                                    SysMenu _SysMenuObj = new SysMenu();
                                     {
-                                        _HomeObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _HomeObj.ID);
-                                        _HomeObj.LinkName = (sdr["LinkName"].ToString() != "" ? (sdr["LinkName"].ToString()) : _HomeObj.LinkName);
-                                        _HomeObj.LinkDescription = (sdr["LinkDescription"].ToString() != "" ? (sdr["LinkDescription"].ToString()) : _HomeObj.LinkDescription);
-                                        _HomeObj.Controller = (sdr["Controller"].ToString() != "" ? sdr["Controller"].ToString() : _HomeObj.Controller);
-                                        _HomeObj.Action = (sdr["Action"].ToString() != "" ? sdr["Action"].ToString() : _HomeObj.Action);
-                                        _HomeObj.Order = (sdr["Order"].ToString() != "" ? int.Parse(sdr["Order"].ToString()) : _HomeObj.Order);
-                                        _HomeObj.Type= (sdr["Type"].ToString() != "" ? sdr["Type"].ToString() : _HomeObj.Type);
+                                        _SysMenuObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _SysMenuObj.ID);
+                                        _SysMenuObj.LinkName = (sdr["LinkName"].ToString() != "" ? (sdr["LinkName"].ToString()) : _SysMenuObj.LinkName);
+                                        _SysMenuObj.LinkDescription = (sdr["LinkDescription"].ToString() != "" ? (sdr["LinkDescription"].ToString()) : _SysMenuObj.LinkDescription);
+                                        _SysMenuObj.Controller = (sdr["Controller"].ToString() != "" ? sdr["Controller"].ToString() : _SysMenuObj.Controller);
+                                        _SysMenuObj.Action = (sdr["Action"].ToString() != "" ? sdr["Action"].ToString() : _SysMenuObj.Action);
+                                        _SysMenuObj.Order = (sdr["Order"].ToString() != "" ? int.Parse(sdr["Order"].ToString()) : _SysMenuObj.Order);
+                                        _SysMenuObj.Type= (sdr["Type"].ToString() != "" ? sdr["Type"].ToString() : _SysMenuObj.Type);
                                     }
-                                    Linklist.Add(_HomeObj);
+                                    Linklist.Add(_SysMenuObj);
                                 }
                             }
                         }

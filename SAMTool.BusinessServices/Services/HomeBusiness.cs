@@ -16,7 +16,7 @@ namespace SAMTool.BusinessServices.Services
         {
             _homeRepository = homeRepository;
         }
-        public List<Home> GetAllSysLinks()
+        public List<SysMenu> GetAllSysLinks()
         {
             return _homeRepository.GetAllSysLinks();
         }

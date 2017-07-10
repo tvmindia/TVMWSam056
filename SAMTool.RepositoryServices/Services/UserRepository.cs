@@ -40,18 +40,19 @@ namespace SAMTool.RepositoryServices.Services
                                 UserList = new List<User>();
                                 while (sdr.Read())
                                 {
-                                    User _rolesObj = new User();
+                                    User _userObj = new User();
                                     {
-                                        _rolesObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _rolesObj.ID);
-                                        _rolesObj.LoginName = (sdr["LoginName"].ToString() != "" ? sdr["LoginName"].ToString() : _rolesObj.LoginName);
-                                        _rolesObj.UserName = (sdr["UserName"].ToString() != "" ? sdr["UserName"].ToString() : _rolesObj.UserName);
-                                        _rolesObj.Active = (sdr["Active"].ToString() != "" ? Boolean.Parse(sdr["Active"].ToString()) : _rolesObj.Active);
-                                        _rolesObj.Email = (sdr["emailID"].ToString() != "" ? sdr["emailID"].ToString() : _rolesObj.UserName);
-                                        _rolesObj.RoleCSV= (sdr["RoleList"].ToString() != "" ? sdr["RoleList"].ToString() : _rolesObj.RoleCSV);
-                                        _rolesObj.RoleIDCSV = (sdr["RoleListID"].ToString() != "" ? sdr["RoleListID"].ToString() : _rolesObj.RoleIDCSV);
-                                        _rolesObj.Password= (sdr["Password"].ToString() != "" ? sdr["Password"].ToString() : _rolesObj.Password);
+                                        _userObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _userObj.ID);
+                                        _userObj.LoginName = (sdr["LoginName"].ToString() != "" ? sdr["LoginName"].ToString() : _userObj.LoginName);
+                                        _userObj.UserName = (sdr["UserName"].ToString() != "" ? sdr["UserName"].ToString() : _userObj.UserName);
+                                        _userObj.Active = (sdr["Active"].ToString() != "" ? Boolean.Parse(sdr["Active"].ToString()) : _userObj.Active);
+                                        _userObj.Email = (sdr["emailID"].ToString() != "" ? sdr["emailID"].ToString() : _userObj.UserName);
+                                        _userObj.RoleCSV= (sdr["RoleList"].ToString() != "" ? sdr["RoleList"].ToString() : _userObj.RoleCSV);
+                                        _userObj.RoleIDCSV = (sdr["RoleListID"].ToString() != "" ? sdr["RoleListID"].ToString() : _userObj.RoleIDCSV);
+                                        _userObj.Password= (sdr["Password"].ToString() != "" ? sdr["Password"].ToString() : _userObj.Password);
+                                       
                                     }
-                                    UserList.Add(_rolesObj);
+                                    UserList.Add(_userObj);
                                 }
                             }
                         }
@@ -91,8 +92,8 @@ namespace SAMTool.RepositoryServices.Services
                         cmd.Parameters.Add("@Active", SqlDbType.Bit).Value = userObj.Active;
                         cmd.Parameters.Add("@RoleList", SqlDbType.NVarChar, -1).Value = userObj.RoleCSV;
                         cmd.Parameters.Add("@EmailID", SqlDbType.NVarChar, 250).Value = userObj.Email;
-                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = "Gibin"; //userObj.logDetails.CreatedBy;
-                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Now;//userObj.logDetails.CreatedDate;
+                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = userObj.commonDetails.CreatedBy; //userObj.logDetails.CreatedBy;
+                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = userObj.commonDetails.CreatedDate;
 
                         outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
@@ -154,8 +155,8 @@ namespace SAMTool.RepositoryServices.Services
                         cmd.Parameters.Add("@Active", SqlDbType.Bit).Value = userObj.Active;
                         cmd.Parameters.Add("@RoleList", SqlDbType.NVarChar, -1).Value = userObj.RoleCSV;
                         cmd.Parameters.Add("@EmailID", SqlDbType.NVarChar, 250).Value = userObj.Email;
-                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = "Gibin"; //userObj.logDetails.CreatedBy;
-                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now;//userObj.logDetails.CreatedDate;
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = userObj.commonDetails.CreatedBy;
+                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = userObj.commonDetails.CreatedDate;
 
                         outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output; 

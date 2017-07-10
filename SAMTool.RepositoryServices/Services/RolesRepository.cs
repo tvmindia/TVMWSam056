@@ -132,8 +132,8 @@ namespace SAMTool.RepositoryServices.Services
                         cmd.Parameters.Add("@AppID", SqlDbType.UniqueIdentifier).Value = RolesObj.AppID;
                         cmd.Parameters.Add("@RoleName", SqlDbType.NVarChar, 250).Value = RolesObj.RoleName;
                         cmd.Parameters.Add("@RoleDescription", SqlDbType.NVarChar, 250).Value = RolesObj.RoleDescription; 
-                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = "Gibin"; //userObj.logDetails.CreatedBy;
-                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Now;//userObj.logDetails.CreatedDate;
+                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = RolesObj.commonDetails.CreatedBy; //userObj.logDetails.CreatedBy;
+                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = RolesObj.commonDetails.CreatedDate;
 
                         outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
@@ -193,8 +193,8 @@ namespace SAMTool.RepositoryServices.Services
                         cmd.Parameters.Add("@AppID", SqlDbType.UniqueIdentifier).Value = RolesObj.AppID;
                         cmd.Parameters.Add("@RoleName", SqlDbType.NVarChar, 250).Value = RolesObj.RoleName;
                         cmd.Parameters.Add("@RoleDescription", SqlDbType.NVarChar, 250).Value = RolesObj.RoleDescription; 
-                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = "Gibin"; //userObj.logDetails.CreatedBy;
-                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now;//userObj.logDetails.CreatedDate;
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = RolesObj.commonDetails.UpdatedBy;
+                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = RolesObj.commonDetails.CreatedDate;
 
                         outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;

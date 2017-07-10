@@ -2,10 +2,8 @@
 using SAMTool.BusinessServices.Contracts;
 using SAMTool.DataAccessObject.DTO;
 using SAMTool.UI.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SAMTool.UI.Controllers
@@ -20,8 +18,11 @@ namespace SAMTool.UI.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            List<HomeViewModel> SysLinks = Mapper.Map<List<Home>, List<HomeViewModel>>(_homeBusiness.GetAllSysLinks());
-            return View(SysLinks);
+            HomeViewModel homeViewModel = new HomeViewModel();
+            List<SysMenuViewModel> SysMenuViewModelList= Mapper.Map<List<SysMenu>, List<SysMenuViewModel>>(_homeBusiness.GetAllSysLinks());
+            homeViewModel._LHSSysMenuViewModel = SysMenuViewModelList != null ? SysMenuViewModelList.Where(s => s.Type == "LHS").ToList():new List<SysMenuViewModel>();
+            homeViewModel._RHSSysMenuViewModel= SysMenuViewModelList != null ? SysMenuViewModelList.Where(s => s.Type == "RHS").ToList(): new List<SysMenuViewModel>();
+            return View(homeViewModel);
         }
     }
 }

@@ -122,7 +122,7 @@
     <Compile Include="DTO\Common.cs" />
     <Compile Include="DTO\ManageAccess.cs" />
     <Compile Include="DTO\Roles.cs" />
-    <Compile Include="DTO\Home.cs" />
+    <Compile Include="DTO\SysMenu.cs" />
     <Compile Include="DTO\User.cs" />
     <Compile Include="DTO\Privileges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

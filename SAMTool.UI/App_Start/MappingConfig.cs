@@ -21,7 +21,7 @@ namespace SAMTool.UI.App_Start
 
                 // config.CreateMap<TempVM, Temp>().ReverseMap();
                 config.CreateMap<LoginViewModel, User>().ReverseMap();
-                config.CreateMap<HomeViewModel, Home>().ReverseMap();
+                config.CreateMap<SysMenuViewModel, SysMenu>().ReverseMap();
                 config.CreateMap<RolesViewModel, Roles>().ReverseMap();
                 config.CreateMap<UserViewModel, User>().ReverseMap();
                 config.CreateMap<ApplicationViewModel, Application>().ReverseMap();
