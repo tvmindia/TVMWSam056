@@ -48,7 +48,7 @@ namespace SAMTool.RepositoryServices.Services
                                         _appObjectlistObj.AppName = (sdr["AppName"].ToString() != "" ? (sdr["AppName"].ToString()) : _appObjectlistObj.AppName);
                                         _appObjectlistObj.commonDetails = new Common();
                                         _appObjectlistObj.commonDetails.CreatedDatestr = (sdr["CreatedDate"].ToString() != "" ? DateTime.Parse(sdr["CreatedDate"].ToString()).ToString("dd-MMM-yyyy") : _appObjectlistObj.commonDetails.CreatedDatestr);
-
+                                        _appObjectlistObj.commonDetails.CreatedBy= (sdr["CreatedBy"].ToString() != "" ? sdr["CreatedBy"].ToString() : _appObjectlistObj.commonDetails.CreatedBy);
                                     }
 
                                     appObjectList.Add(_appObjectlistObj);
@@ -243,10 +243,9 @@ namespace SAMTool.RepositoryServices.Services
                                         _appObjectlistObj.ObjectName = (sdr["ObjectName"].ToString() != "" ? (sdr["ObjectName"].ToString()) : _appObjectlistObj.ObjectName);
                                         _appObjectlistObj.SubObjName = (sdr["SubObjName"].ToString() != "" ? (sdr["SubObjName"].ToString()) : _appObjectlistObj.SubObjName);
                                         _appObjectlistObj.AppName = (sdr["AppName"].ToString() != "" ? (sdr["AppName"].ToString()) : _appObjectlistObj.AppName);
-
                                         _appObjectlistObj.commonDetails = new Common();
                                         _appObjectlistObj.commonDetails.CreatedDatestr = (sdr["CreatedDate"].ToString() != "" ? DateTime.Parse(sdr["CreatedDate"].ToString()).ToString("dd-MMM-yyyy") : _appObjectlistObj.commonDetails.CreatedDatestr);
-
+                                        _appObjectlistObj.commonDetails.CreatedBy= (sdr["CreatedBy"].ToString() != "" ? (sdr["CreatedBy"].ToString()) : _appObjectlistObj.commonDetails.CreatedBy);
                                     }
 
                                     appObjectList.Add(_appObjectlistObj);

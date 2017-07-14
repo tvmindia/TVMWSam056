@@ -19,6 +19,12 @@ namespace SAMTool.DataAccessObject.DTO
         public string CreatedDatestr { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
+        public DateTime GetCurrentDateTime()
+        {
+            string tz = System.Web.Configuration.WebConfigurationManager.AppSettings["TimeZone"];
+            DateTime DateNow = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Local);
+            return (TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateNow, tz));
+        }
     }
     public class ConstMessage
     {

@@ -94,6 +94,9 @@ namespace SAMTool.RepositoryServices.Services
                                         _rolesObj.RoleDescription = (sdr["RoleDescription"].ToString() != "" ? sdr["RoleDescription"].ToString() : _rolesObj.RoleDescription);
                                         _rolesObj.RoleName = (sdr["RoleName"].ToString() != "" ? sdr["RoleName"].ToString() : _rolesObj.RoleName);
                                         _rolesObj.ApplicationName = (sdr["ApplicationName"].ToString() != "" ? sdr["ApplicationName"].ToString() : _rolesObj.ApplicationName);
+                                        _rolesObj.commonDetails = new Common();
+                                        _rolesObj.commonDetails.CreatedBy= (sdr["CreatedBy"].ToString() != "" ? sdr["CreatedBy"].ToString() : _rolesObj.commonDetails.CreatedBy);
+                                        _rolesObj.commonDetails.CreatedDatestr = (sdr["CreatedDate"].ToString() != "" ? DateTime.Parse(sdr["CreatedDate"].ToString()).ToString("dd-MMM-yyyy") : _rolesObj.commonDetails.CreatedDatestr);
                                     }
                                     rolesList.Add(_rolesObj);
                                 }

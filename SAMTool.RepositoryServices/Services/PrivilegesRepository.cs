@@ -95,8 +95,8 @@ namespace SAMTool.RepositoryServices.Services
                                         _PrivilObj.AccessDescription = (sdr["AccessDescription"].ToString() != "" ? sdr["AccessDescription"].ToString() : _PrivilObj.AccessDescription);
                                         _PrivilObj.ModuleName = (sdr["ModuleName"].ToString() != "" ? sdr["ModuleName"].ToString() : _PrivilObj.ModuleName);
                                         _PrivilObj.commonDetails = new Common();
-                                        _PrivilObj.commonDetails.CreatedDate = (sdr["CreatedDate"].ToString() != "" ? DateTime.Parse(sdr["CreatedDate"].ToString()) : _PrivilObj.commonDetails.CreatedDate);
-                                      
+                                        _PrivilObj.commonDetails.CreatedDatestr = (sdr["CreatedDate"].ToString() != "" ? DateTime.Parse(sdr["CreatedDate"].ToString()).ToString("dd-MMM-yyyy") : _PrivilObj.commonDetails.CreatedDatestr);
+                                        _PrivilObj.commonDetails.CreatedBy= (sdr["CreatedBy"].ToString() != "" ? sdr["CreatedBy"].ToString() : _PrivilObj.commonDetails.CreatedBy);
                                     }
                                     PrivilegesList.Add(_PrivilObj);
                                 }

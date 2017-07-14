@@ -53,6 +53,7 @@ namespace SAMTool.RepositoryServices.Services
                                         _manageAccesslistObj.Read= (sdr["R"].ToString() != "" ? bool.Parse(sdr["R"].ToString()) : _manageAccesslistObj.Read);
                                         _manageAccesslistObj.Write = (sdr["W"].ToString() != "" ? bool.Parse(sdr["W"].ToString()) : _manageAccesslistObj.Write);
                                         _manageAccesslistObj.Delete = (sdr["D"].ToString() != "" ? bool.Parse(sdr["D"].ToString()) : _manageAccesslistObj.Delete);
+                                        
                                     }
 
                                     manageAccessList.Add(_manageAccesslistObj);

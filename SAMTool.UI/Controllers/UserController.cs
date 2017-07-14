@@ -25,11 +25,11 @@ namespace SAMTool.UI.Controllers
             _rolesBusiness = rolesBusiness;
         }
 
-       // [AuthSecurityFilter(ProjectObject = "User", Mode = "R")]
+        [AuthSecurityFilter(ProjectObject = "User", Mode = "R")]
         [HttpGet]
         public  ActionResult Index()
         {
-
+            UA _appUA = Session["TvmValid"] as UA;
             UserViewModel userobj = new UserViewModel();
             userobj.RoleList = Mapper.Map<List<Roles>, List<RolesViewModel>>(_rolesBusiness.GetAllAppRoles(null));
             return View(userobj); 
@@ -45,14 +45,15 @@ namespace SAMTool.UI.Controllers
             object result = null; 
             if (ModelState.IsValid)
             {
+                UA ua = Session["TvmValid"] as UA;
                 if (UserObj.ID == Guid.Empty)
                 {
                         try
                         {
-                            //UserObj.commonObj = new LogDetailsViewModel();
-                            //UserObj.commonObj.CreatedBy = _commonBusiness.GetUA().UserName;
-                            //UserObj.commonObj.CreatedDate = _commonBusiness.GetCurrentDateTime();
-                            result = _userBusiness.InsertUser(Mapper.Map<UserViewModel, User>(UserObj));
+                        UserObj.commonDetails=new CommonViewModel();
+                        UserObj.commonDetails.CreatedBy = ua.UserName;
+                        UserObj.commonDetails.CreatedDate = ua.DateTime;
+                        result = _userBusiness.InsertUser(Mapper.Map<UserViewModel, User>(UserObj));
                         }
                         catch (Exception ex)
                         {
@@ -62,10 +63,10 @@ namespace SAMTool.UI.Controllers
                 else {
                     try
                         {
-                            //UserObj.commonObj = new LogDetailsViewModel();
-                            //UserObj.commonObj.UpdatedBy = _commonBusiness.GetUA().UserName;
-                            //UserObj.commonObj.UpdatedDate = _commonBusiness.GetCurrentDateTime();
-                            result = _userBusiness.UpdateUser(Mapper.Map<UserViewModel, User>(UserObj));
+                        UserObj.commonDetails = new CommonViewModel();
+                        UserObj.commonDetails.UpdatedBy = ua.UserName;
+                        UserObj.commonDetails.UpdatedDate = ua.DateTime;
+                        result = _userBusiness.UpdateUser(Mapper.Map<UserViewModel, User>(UserObj));
                         }
                         catch (Exception ex)
                         {

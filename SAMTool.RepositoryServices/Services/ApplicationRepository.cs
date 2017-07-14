@@ -86,12 +86,12 @@ namespace SAMTool.RepositoryServices.Services
                                 while (sdr.Read())
                                 {
                                     Application applicationObj = new Application();
-
                                     {
                                         applicationObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : applicationObj.ID);
                                         applicationObj.Name = (sdr["Name"].ToString() != "" ? sdr["Name"].ToString() : applicationObj.Name);
-                                        //applicationObj.CreatedDate = (sdr["CreatedDate"].ToString() != "" ? sdr["CreatedDate"].ToString() : applicationObj.CreatedDate);
-                                        
+                                        applicationObj.commonDetails = new Common();
+                                        applicationObj.commonDetails.CreatedDatestr = (sdr["CreatedDate"].ToString() != "" ? DateTime.Parse(sdr["CreatedDate"].ToString()).ToString("dd-MMM-yyyy") : applicationObj.commonDetails.CreatedDatestr);
+
                                     };
 
                                     ApplicationList.Add(applicationObj);

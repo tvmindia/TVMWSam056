@@ -51,7 +51,11 @@ namespace SAMTool.UI.SecurityFilter
                     filterContext.HttpContext.User = new System.Security.Principal.GenericPrincipal(
                     new System.Security.Principal.GenericIdentity(authTicket.Name, "Forms"), authTicket.UserData.Split(',').Select(t => t.Trim()).ToArray());
                     LoggedUserName = authTicket.UserData;
-                }
+                    UA _ua = (UA)filterContext.HttpContext.Session["TvmValid"];
+                    Common common = new Common();
+                    _ua.DateTime = common.GetCurrentDateTime();
+                    filterContext.HttpContext.Session.Add("TvmValid", _ua);
+            }  
             //}
             //NON AJAX CALL
             //else

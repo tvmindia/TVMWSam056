@@ -50,7 +50,9 @@ namespace SAMTool.RepositoryServices.Services
                                         _userObj.RoleCSV= (sdr["RoleList"].ToString() != "" ? sdr["RoleList"].ToString() : _userObj.RoleCSV);
                                         _userObj.RoleIDCSV = (sdr["RoleListID"].ToString() != "" ? sdr["RoleListID"].ToString() : _userObj.RoleIDCSV);
                                         _userObj.Password= (sdr["Password"].ToString() != "" ? sdr["Password"].ToString() : _userObj.Password);
-                                       
+                                        _userObj.commonDetails = new Common();
+                                        _userObj.commonDetails.CreatedBy = (sdr["CreatedBy"].ToString() != "" ? sdr["CreatedBy"].ToString() : _userObj.commonDetails.CreatedBy);
+                                        _userObj.commonDetails.CreatedDatestr = (sdr["CreatedDate"].ToString() != "" ? DateTime.Parse(sdr["CreatedDate"].ToString()).ToString("dd-MMM-yyyy") : _userObj.commonDetails.CreatedDatestr);
                                     }
                                     UserList.Add(_userObj);
                                 }
