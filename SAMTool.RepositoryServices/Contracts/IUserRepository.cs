@@ -9,7 +9,7 @@ namespace SAMTool.RepositoryServices.Contracts
 {
     public interface IUserRepository
     {
-        List<User> GetAllUsers();
+        List<User> GetAllUsers(Guid? AppID);
         object InsertUser(User userObj);
         object UpdateUser(User userObj);
         object DeleteUser(User userObj);

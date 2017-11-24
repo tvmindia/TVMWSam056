@@ -16,7 +16,6 @@ namespace SAMTool.UI.Controllers
 
         private IRolesBusiness _rolesBusiness;
         private IApplicationBusiness _applicationBusiness;
-
         public RolesController(IRolesBusiness rolesBusiness,IApplicationBusiness applicationBusiness)
         {
             _rolesBusiness = rolesBusiness;
@@ -70,13 +69,14 @@ namespace SAMTool.UI.Controllers
             object result = null;
             if (ModelState.IsValid)
             {
+                UA ua = Session["TvmValid"] as UA;
                 if (rolesObj.ID == Guid.Empty)
-                {
+                {                    
                     try
                     {
-                        //UserObj.commonObj = new LogDetailsViewModel();
-                        //UserObj.commonObj.CreatedBy = _commonBusiness.GetUA().UserName;
-                        //UserObj.commonObj.CreatedDate = _commonBusiness.GetCurrentDateTime();
+                        rolesObj.commonDetails = new CommonViewModel();
+                        rolesObj.commonDetails.CreatedBy = ua.UserName;
+                        rolesObj.commonDetails.CreatedDate = DateTime.Now;
                         result = _rolesBusiness.InsertRoles(Mapper.Map<RolesViewModel, Roles>(rolesObj));
                     }
                     catch (Exception ex)
@@ -88,9 +88,9 @@ namespace SAMTool.UI.Controllers
                 {
                     try
                     {
-                        //UserObj.commonObj = new LogDetailsViewModel();
-                        //UserObj.commonObj.UpdatedBy = _commonBusiness.GetUA().UserName;
-                        //UserObj.commonObj.UpdatedDate = _commonBusiness.GetCurrentDateTime();
+                        rolesObj.commonDetails = new CommonViewModel();
+                        rolesObj.commonDetails.UpdatedBy = ua.UserName;
+                        rolesObj.commonDetails.UpdatedDate = DateTime.Now;
                         result = _rolesBusiness.UpdateRoles(Mapper.Map<RolesViewModel, Roles>(rolesObj));
                     }
                     catch (Exception ex)

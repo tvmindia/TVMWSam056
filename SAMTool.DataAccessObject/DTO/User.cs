@@ -16,7 +16,7 @@ namespace SAMTool.DataAccessObject.DTO
         public string RoleIDCSV { get; set; }
         public bool Active { get; set; }
         public string Email { get; set; }
-
+        public Guid? AppID { get; set; }
         public Common commonDetails { get; set; }
 
 

@@ -29,7 +29,7 @@ namespace SAMTool.BusinessServices.Services
             List<User> userList = null;
             try
             {
-                userList = _userRepository.GetAllUsers();
+                userList = _userRepository.GetAllUsers(null);
                 userList = userList == null ? null : userList.Select(c => { c.Password = null; return c; }).ToList();
             }
             catch (Exception ex)
@@ -45,7 +45,7 @@ namespace SAMTool.BusinessServices.Services
          
             try
             {
-                UserList = _userRepository.GetAllUsers();
+                UserList = _userRepository.GetAllUsers(null);
                 UserList = UserList!=null?UserList.Where(j => j.ID==Guid.Parse(id)).ToList():null;
             }
             catch (Exception ex)
@@ -98,7 +98,7 @@ namespace SAMTool.BusinessServices.Services
 
             try
             {
-               userList = _userRepository.GetAllUsers();
+               userList = _userRepository.GetAllUsers(AppID);
                userList = userList == null ? null : userList.Where(us => us.Active==true && us.LoginName.ToLower() == user.LoginName.ToLower() && us.Password == Encrypt(user.Password)).Select(c => { c.Password = null; return c; }).ToList();
               _user = userList == null || userList.Count==0 ? null : userList[0];
             }

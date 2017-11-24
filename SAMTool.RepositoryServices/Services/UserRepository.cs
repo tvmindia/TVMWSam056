@@ -17,7 +17,7 @@ namespace SAMTool.RepositoryServices.Services
             _databaseFactory = databaseFactory;
         }
 
-        public List<User> GetAllUsers()
+        public List<User> GetAllUsers(Guid? AppID)
         {
             List<User> UserList = null;
             try
@@ -32,6 +32,7 @@ namespace SAMTool.RepositoryServices.Services
                         }
                         cmd.Connection = con;
                         cmd.CommandText = "[GetUser]";
+                        cmd.Parameters.Add("@AppID", SqlDbType.UniqueIdentifier).Value = AppID;
                         cmd.CommandType = CommandType.StoredProcedure;
                         using (SqlDataReader sdr = cmd.ExecuteReader())
                         {
@@ -157,9 +158,9 @@ namespace SAMTool.RepositoryServices.Services
                         cmd.Parameters.Add("@Active", SqlDbType.Bit).Value = userObj.Active;
                         cmd.Parameters.Add("@RoleList", SqlDbType.NVarChar, -1).Value = userObj.RoleCSV;
                         cmd.Parameters.Add("@EmailID", SqlDbType.NVarChar, 250).Value = userObj.Email;
-                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = userObj.commonDetails.CreatedBy;
-                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = userObj.commonDetails.CreatedDate;
-
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = userObj.commonDetails.UpdatedBy;
+                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = userObj.commonDetails.UpdatedDate;
+                        cmd.Parameters.Add("@AppID", SqlDbType.UniqueIdentifier).Value = userObj.AppID;
                         outParameter = cmd.Parameters.Add("@StatusOut", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output; 
                         cmd.ExecuteNonQuery();
