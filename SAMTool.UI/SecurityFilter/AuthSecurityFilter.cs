@@ -113,27 +113,51 @@ namespace SAMTool.UI.SecurityFilter
 
         public void OnAuthorization(AuthorizationContext filterContext)
         {
-            Permission _permission =null;
-            //string UserName = "";
-            //UserName=filterContext.RequestContext.HttpContext.User.Identity.Name;
-            _permission = _userBusiness.GetSecurityCode(LoggedUserName, ProjectObject);
-            if (_permission.AccessCode.Contains(Mode))
+            //Permission _permission =null;
+            List<Permission> permissionList = (List<Permission>)filterContext.HttpContext.Session["UserRights"] == null ? new List<Permission>() : (List<Permission>)filterContext.HttpContext.Session["UserRights"];
+            if(permissionList!=null)
             {
-                //Allows Permission
-                filterContext.HttpContext.Session.Add("UserRights", _permission);
+                if(permissionList.Where(x=>x.Name== ProjectObject).ToList()[0].AccessCode.Contains(Mode))
+                {
+
+                }
+                else
+                {
+                    if (filterContext.HttpContext.Request.IsAjaxRequest())
+                    {
+                        filterContext.Result = new HttpUnauthorizedResult();
+                    }
+                    else
+                    {    //unauthorized page show here 
+                        filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary() { { "controller", "Account" }, { "action", "NotAuthorized" } });
+                    }
+
+                }
             }
             else
             {
-                if (filterContext.HttpContext.Request.IsAjaxRequest())
-                {
-                    filterContext.Result = new HttpUnauthorizedResult();
-                }
-                else
-               {    //unauthorized page show here 
-                    filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary() { { "controller", "Account" }, { "action", "NotAuthorized" } });
-                }
-                    
+                filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary() { { "controller", "Account" }, { "action", "NotAuthorized" } });
             }
+            //string UserName = "";
+            //UserName=filterContext.RequestContext.HttpContext.User.Identity.Name;
+            //_permission = _userBusiness.GetSecurityCode(LoggedUserName, ProjectObject);
+            //if (_permission.AccessCode.Contains(Mode))
+            //{
+            //    //Allows Permission
+            //    filterContext.HttpContext.Session.Add("UserRights", _permission);
+            //}
+            //else
+            //{
+            //    if (filterContext.HttpContext.Request.IsAjaxRequest())
+            //    {
+            //        filterContext.Result = new HttpUnauthorizedResult();
+            //    }
+            //    else
+            //   {    //unauthorized page show here 
+            //        filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary() { { "controller", "Account" }, { "action", "NotAuthorized" } });
+            //    }
+                    
+            //}
         }
     }
 }

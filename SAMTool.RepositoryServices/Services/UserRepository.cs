@@ -275,6 +275,54 @@ namespace SAMTool.RepositoryServices.Services
 
             return SecurityCode;
         }
+
+        public List<Permission> GetAllAccess(string LoggedUser, Guid AppID)
+        {
+            List<Permission> permissionList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[GetAllAccess]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@LoggedName", SqlDbType.NVarChar, 250).Value = LoggedUser;
+                        cmd.Parameters.Add("@AppID", SqlDbType.UniqueIdentifier).Value = AppID;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                permissionList = new List<Permission>();
+                                while (sdr.Read())
+                                {
+                                    Permission permission = new Permission();
+                                    {
+                                        permission.ID= (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : Guid.Empty);
+                                        permission.Name = (sdr["ObjectName"].ToString() != "" ? sdr["ObjectName"].ToString() : string.Empty);
+                                        permission.AccessCode = (sdr["UserRight"].ToString() != "" ? sdr["UserRight"].ToString() : string.Empty);
+                                        permission.ParentID= (sdr["Parent"].ToString() != "" ? Guid.Parse(sdr["Parent"].ToString()) : Guid.Empty);
+                                    }
+                                    permissionList.Add(permission);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return permissionList;
+        }
         public List<SubPermission> GetSubObjectAccess(string LoggedUser, string ObjectName, Guid AppID)
         {
             List<SubPermission> SubPermissionList = null;

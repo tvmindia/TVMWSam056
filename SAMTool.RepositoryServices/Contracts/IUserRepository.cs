@@ -14,6 +14,7 @@ namespace SAMTool.RepositoryServices.Contracts
         object UpdateUser(User userObj);
         object DeleteUser(User userObj);
         string GetObjectAccess(string LoggedUser, string ObjectName, Guid AppID);
+        List<Permission> GetAllAccess(string LoggedUser, Guid AppID);
         List<SubPermission> GetSubObjectAccess(string LoggedUser, string ObjectName, Guid AppID);
     }
 }

@@ -149,7 +149,21 @@ namespace SAMTool.BusinessServices.Services
             };
             return _permission;
         }
+        public List<Permission> GetAllAccess(string LoginName)
+        {
+            List<Permission> permissionList = _userRepository.GetAllAccess(LoginName, AppID);
 
+            return permissionList = permissionList != null ? (from permission in permissionList.Where(x => x.ParentID == Guid.Empty).ToList() select new Permission
+            {
+                Name = permission.Name,
+                AccessCode = permission.AccessCode,
+                SubPermissionList = permissionList.Where(x => x.ParentID == permission.ID).ToList().Count>0?(from subPermission in permissionList.Where(x => x.ParentID == permission.ID).ToList() select new SubPermission
+                {
+                    Name = subPermission.Name.ToString(),
+                    AccessCode = subPermission.AccessCode.ToString()
+                }).ToList():new List<SubPermission>(),
+            }).ToList() :new List<Permission>();
+        }
         public object DeleteUser(User userObj)
         {
             object result = null;

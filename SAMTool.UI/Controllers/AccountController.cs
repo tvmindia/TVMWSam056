@@ -23,7 +23,7 @@ namespace SAMTool.UI.Controllers
             _userBusiness = userBusiness;
         }
 
-       
+
         // GET: Account
         public ActionResult Index()
         {
@@ -46,38 +46,39 @@ namespace SAMTool.UI.Controllers
                     return View("Index", loginvm);
                 }
                 uservm = Mapper.Map<User, UserViewModel>(_userBusiness.CheckUserCredentials(Mapper.Map<LoginViewModel, User>(loginvm)));
-                    if (uservm != null)
+                if (uservm != null)
+                {
+                    if (uservm.RoleList == null || uservm.RoleList.Count == 0 && string.IsNullOrEmpty(uservm.RoleIDCSV))
                     {
-                        if(uservm.RoleList == null || uservm.RoleList.Count==0 && string.IsNullOrEmpty(uservm.RoleIDCSV))
-                        {
                         loginvm.IsFailure = true;
                         loginvm.Message = _const.LoginFailedNoRoles;
                         return View("Index", loginvm);
-                        } 
-                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, uservm.UserName, DateTime.Now, DateTime.Now.AddHours(24), true, uservm.LoginName);
-                        string encryptedTicket = FormsAuthentication.Encrypt(ticket);
-                        Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
-                        //session setting
-                        UA ua = new UA();
-                        ua.UserName = uservm.UserName;
-                        ua.AppID = AppID;
-                        Session.Add("TvmValid", ua);
-                        return RedirectToLocal();
                     }
-                    else
-                    {
-                        loginvm.IsFailure = true;
-                        loginvm.Message = _const.LoginFailed;
-                        return View("Index", loginvm);
-                    }
-              
+                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, uservm.UserName, DateTime.Now, DateTime.Now.AddHours(24), true, uservm.LoginName);
+                    string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                    Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
+                    //session setting
+                    UA ua = new UA();
+                    ua.UserName = uservm.UserName;
+                    ua.AppID = AppID;
+                    Session.Add("TvmValid", ua);
+                    Session.Add("UserRights", _userBusiness.GetAllAccess(uservm.LoginName));
+                    return RedirectToLocal();
+                }
+                else
+                {
+                    loginvm.IsFailure = true;
+                    loginvm.Message = _const.LoginFailed;
+                    return View("Index", loginvm);
+                }
+
 
 
             }
             catch (Exception ex)
             {
                 throw ex;
-               
+
             }
         }
         #endregion UserInsertUpdate

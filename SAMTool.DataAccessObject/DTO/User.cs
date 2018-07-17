@@ -23,8 +23,10 @@ namespace SAMTool.DataAccessObject.DTO
     }
     public class Permission
     {
+        public Guid ID { get; set; }
         public string Name { get; set; }
         public string AccessCode { get; set; }
+        public Guid ParentID { get; set; }
         public List<SubPermission> SubPermissionList { get; set; }
     }
     public class SubPermission
